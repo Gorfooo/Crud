@@ -1,0 +1,12 @@
+body{
+    background-image:url("../images/login.jpg");
+    color:white;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: center;
+    height: 900px;
+}
+.inputt{
+    border-style:groove;
+    border-color:black;
+}

@@ -1,0 +1,11 @@
+body{
+    background-image:url("../images/cadastro.jpg");
+    color:white;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: center;
+    height: 900px;
+}
+.borda{
+    border-color: red;
+}
