@@ -30,7 +30,6 @@ $retorno = $_GET['retorno']; //pega o retorno do header do arquivo validaLogin.p
 ?>
 <script>var retorno = "<?= $retorno ?>";</script> 
 <script src="js/login.js"></script>
-
     <div class='container' style='width: 400px;'>
         <form name='form' id='form' method="POST" action="validaLogin.php">
             <div class='form-group pt-5'>
@@ -46,16 +45,18 @@ $retorno = $_GET['retorno']; //pega o retorno do header do arquivo validaLogin.p
                     </div>
                     <div class='col pl-1'>
                         <a href="#" class="btn btn-dark mt-2 btn-md btn-block" onclick='window.open("cadastro.html","_self")'>Criar Conta</a>
-                    </div>
                 </div>
             </div>
         </form>
-        <div class="alert alert-danger fixed-top mt-5 text-center mr-2" id='usuarioIncorreto' style='width: 200px; display: none' role="alert">
-            <label>Usuário incorreto</label>
-        </div>
-        <div class="alert alert-danger fixed-top mt-5 text-center mr-2" id='senhaIncorreta' style='width: 200px; display: none' role="alert">
-            <label>Senha incorreta</label>
-        </div>
-    </div>
+    </div> 
+        </div class='row'>
+            <div>
+            <div class="col-auto alert alert-danger text-center" id='usuarioIncorreto' style='width: 200px;' role="alert">
+                Usuário Incorreto
+            </div>
+            <div class="col-auto alert alert-danger text-center" id='senhaIncorreta' style='width: 200px;' role="alert">
+                Senha Incorreta
+            </div>
+        </div> 
 </body>
 </html>

@@ -6,7 +6,7 @@ $senha2 = $_POST['senha2'];
 $nome = $_POST['nome'];
 $nascimento = $_POST['nascimento'];
 $empresa = $_POST['empresa'];
-$SQL = "insert into login(email,senha,nome,nascimento,emprsa)values('" . $email . "','" . $senha . "','" . $nome . "','" . $nascimento . "','" . $empresa . "')";
+$SQL = "insert into login(email,senha,nome,nascimento,empresa)values('" . $email . "','" . $senha . "','" . $nome . "','" . $nascimento . "','" . $empresa . "')";
 if(!(mysqli_query($conexao,$SQL)))
 {
     $erro = mysqli_error($conexao);
@@ -17,6 +17,6 @@ if(!(mysqli_query($conexao,$SQL)))
 }
 else
 {
-    echo "<script>javascript:window.location='crud/principal.html';</script>";
+    echo "<script>javascript:window.location='index.php';</script>";
 }
 ?>
