@@ -3,9 +3,27 @@ body{
     color:white;
     background-repeat:no-repeat;
     background-size:cover;
+    background-attachment: fixed;
+    overflow: hidden;
     background-position: center;
-    height: 900px;
 }
 .borda{
     border-color: red;
+}
+.erro{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    margin-top: 50px;
+    margin-right: 50px;
+}
+@media only screen and (max-width: 525px){
+    .row{
+        display: unset;
+        -ms-flex-wrap: '';
+        flex-wrap: '';
+        margin-right: 0px;
+        margin-left: 0px;
+    }
 }

@@ -1,27 +1,22 @@
-$(function(){//mostra senha
-    $('#mostrarSenha').bind('click',function(e){
-        if($('#senha').attr("type") == "text")
-        {
-            $('#senha').attr("type","password");
-        }
-        else
-        {
-            $('#senha').attr("type","text");
-        }
-    });
-})
-$(function(){//mostra senha
-    $('#mostrarSenha').bind('click',function(e){
-        if($('#senha2').attr("type") == "text")
-        {
-            $('#senha2').attr("type","password");
-        }
-        else
-        {
-            $('#senha2').attr("type","text");
-        }
-    });
-})
+function mostraSenha(){
+    if($('#senha').attr("type") == "text")
+    {
+        $('#senha').attr("type","password");
+    }
+    else
+    {
+        $('#senha').attr("type","text");
+    }
+    
+    if($('#senha2').attr("type") == "text")
+    {
+        $('#senha2').attr("type","password");
+    }
+    else
+    {
+        $('#senha2').attr("type","text");
+    }
+}
 
 $(function(){//esconde mensagens de erro
     $('#senhaincorreta').hide();
@@ -86,15 +81,18 @@ function validaData(){
     if(new Date < new Date(dataformcorreta))
     {
         $('#datamaior').fadeIn();
+        return false;
     } 
     else if (new Date(dataformcorreta) < new Date('01/01/1900'))
     {
         $('#dataantiga').fadeIn();
+        return false;
     }
+    return true;
 }
 
 function enviaForm(){//valida senha e email, se estiverem corretas envia o form
-    if(!validaData())
+    if(!(validaData()))
     {
         return false;
     }

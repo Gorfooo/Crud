@@ -1,7 +1,5 @@
-$(function(){//mostra senha
-
-    $('#mostrarSenha').bind('click',function(e){
-        
+function mostraSenha(){
+    $(function(){
         if($('#senha').attr("type") == "text")
         {
             $('#senha').attr("type","password");
@@ -10,8 +8,8 @@ $(function(){//mostra senha
         {
             $('#senha').attr("type","text");
         }
-    });
-})
+    })
+}
 
 $(function(){//esconde mensagens de erro
     $('#usuarioIncorreto').hide();

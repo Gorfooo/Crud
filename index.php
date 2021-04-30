@@ -24,7 +24,6 @@
     <title>Login</title>
 </head>
 <body>
-
 <?php 
 $retorno = $_GET['retorno']; //pega o retorno do header do arquivo validaLogin.php
 ?>
@@ -37,7 +36,7 @@ $retorno = $_GET['retorno']; //pega o retorno do header do arquivo validaLogin.p
                 <input type='text' name='usuario' id='usuario' class='form-control mb-2' placeholder="E-mail" maxlength="50" autofocus>
                 <label for="senha">Senha:</label>
                 <input autocomplete="off" type='password' name='senha' id='senha' class='form-control' placeholder="Senha" maxlength="50">
-                <a href="#" class="btn btn-dark mt-2 btn-block" id='mostrarSenha'>Mostrar Senha</a>
+                <a href="#" class="btn btn-dark mt-2 btn-block" id='mostrarSenha' onclick="mostraSenha();">Mostrar Senha</a>
                 <input type="checkbox" id='lembrarSenha'> Lembrar Senha?<br>
                 <div class='row'>
                     <div class='col pr-1'>
@@ -49,14 +48,13 @@ $retorno = $_GET['retorno']; //pega o retorno do header do arquivo validaLogin.p
             </div>
         </form>
     </div> 
-        </div class='row'>
-            <div>
-            <div class="col-auto alert alert-danger text-center" id='usuarioIncorreto' style='width: 200px;' role="alert">
+        <div class='erro'>
+            <div class="alert alert-danger text-center" id='usuarioIncorreto' style='width: 200px;' role="alert">
                 Usuário Incorreto
             </div>
-            <div class="col-auto alert alert-danger text-center" id='senhaIncorreta' style='width: 200px;' role="alert">
+            <div class="alert alert-danger text-center" id='senhaIncorreta' style='width: 200px;' role="alert">
                 Senha Incorreta
             </div>
-        </div> 
+        </div>
 </body>
 </html>
