@@ -49,10 +49,10 @@ $retorno = $_GET['retorno']; //pega o retorno do header do arquivo validaLogin.p
         </form>
     </div> 
         <div class='erro'>
-            <div class="alert alert-danger text-center" id='usuarioIncorreto' style='width: 200px;' role="alert">
+            <div class="alert alert-danger text-center" id='usuarioIncorreto' style='width: 200px; display: none' role="alert">
                 Usuário Incorreto
             </div>
-            <div class="alert alert-danger text-center" id='senhaIncorreta' style='width: 200px;' role="alert">
+            <div class="alert alert-danger text-center" id='senhaIncorreta' style='width: 200px; display: none' role="alert">
                 Senha Incorreta
             </div>
         </div>

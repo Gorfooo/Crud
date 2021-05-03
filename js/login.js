@@ -11,11 +11,6 @@ function mostraSenha(){
     })
 }
 
-$(function(){//esconde mensagens de erro
-    $('#usuarioIncorreto').hide();
-    $('#senhaIncorreta').hide();
-})
-
 $(function(){//desaparece mensagem de erro e adiciona efeito do cursor
     $('#usuarioIncorreto').bind('click',function(){
         $(this).fadeOut();
@@ -32,6 +27,14 @@ $(function(){//desaparece mensagem de erro e adiciona efeito do cursor
         $('#senhaIncorreta').css('cursor','pointer');
     })
 })
+
+setTimeout(function() {
+    $('#usuarioIncorreto').fadeOut();
+}, 3000);
+
+setTimeout(function() {
+    $('#senhaIncorreta').fadeOut();
+}, 3000);
 
 function enviaForm(){
     $('#form').submit();

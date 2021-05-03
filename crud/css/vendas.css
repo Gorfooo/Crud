@@ -1,0 +1,14 @@
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+}
+.grid{
+    display:grid;
+    place-items: end;
+}
+.grid2{
+    display:grid;
+    place-items: center;
+}
+.salvar{
+    left:auto;
+}

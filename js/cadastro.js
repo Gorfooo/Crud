@@ -68,6 +68,22 @@ function validaSenha(){//valida senhas e aparece mensagem de erro
     return false
 }
 
+setTimeout(function() {
+    $('#dataantiga').fadeOut();
+}, 3000);
+
+setTimeout(function() {
+    $('#datamaior').fadeOut();
+}, 3000);
+
+setTimeout(function() {
+    $('#senhaincorreta').fadeOut();
+}, 3000);
+
+setTimeout(function() {
+    $('#emailincorreto').fadeOut();
+}, 3000);
+
 function validateEmail(email)//valida email
 {
     const re = /\S+@\S+\.\S+/;
