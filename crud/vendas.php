@@ -18,7 +18,7 @@
     <!--  -->
     <link rel="stylesheet" type="text/css" href="css/vendas.css">
     <!--  -->
-    <script src="js/vendas.js"></script>
+    <!-- <script src="js/vendas.js"></script> -->
     <title>Vendas</title>
 </head>
 
@@ -153,7 +153,7 @@ $retorno = $_GET['retorno'];
                                     </div>
                                     <div class='form-row'>
                                         <div class='form-group col-md-2'>
-                                            <button class='btn btn-primary'>Adicionar Item</button>
+                                            <button class='btn btn-primary' onclick='enviaItem();'>Adicionar Item</button>
                                         </div>
                                     </div>
                                 </form>
@@ -202,5 +202,4 @@ $retorno = $_GET['retorno'];
         </div>
     </div>
 </body>
-
 </html>
