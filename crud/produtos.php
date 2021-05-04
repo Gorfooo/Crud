@@ -73,39 +73,43 @@ $retorno = $_GET['retorno'];
             </div>
         </div>
         <hr>
-        <table class="table table-hover">
-            <thead class="thead-light table-striped">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Código</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col">Custo</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            include ('../conexao.php');
-            $SQL = "select id_produto,descricao,quantidade,preco,custo,status from tb_produto";
-            $RS = mysqli_query($conexao,$SQL);
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($RS)){
-                echo "<tr>
-                <th>$i</th>
-                <td>" . $row["id_produto"] . "</td>
-                <td>" . $row["descricao"] . "</td>
-                <td>" . $row["quantidade"] ."</td>
-                <td>" . $row["preco"] . "</td>
-                <td>" . $row["custo"] . "</td>
-                <td>" . $row["status"] . "</td>
-                </tr>";
-                $i++;
-             };
-             ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover"valign="bottom">
+                <thead class="thead-light table-striped">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Custo</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    include ('../conexao.php');
+                    $SQL = "select id_produto,descricao,quantidade,preco,custo,status from tb_produto";
+                    $RS = mysqli_query($conexao,$SQL);
+                    $i = 1;
+                    while ($row = mysqli_fetch_assoc($RS)){
+                        echo "<tr>
+                        <th class='centro'>$i</th>
+                        <td class='centro'>" . $row["id_produto"] . "</td>
+                        <td class='centro'>" . $row["descricao"] . "</td>
+                        <td class='centro'>" . $row["quantidade"] ."</td>
+                        <td class='centro'>" . $row["preco"] . "</td>
+                        <td class='centro'>" . $row["custo"] . "</td>
+                        <td class='centro'>" . $row["status"] . "</td>
+                        <td><i class='fas fa-pencil-alt'></i><i class='fas fa-times ml-3'></i></td>
+                        </tr>";
+                        $i++;
+                    };
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </Div>
     <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel">

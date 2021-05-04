@@ -9,3 +9,15 @@ input[type=number]::-webkit-inner-spin-button {
     display:grid;
     place-items: center;
 }
+@media only screen and (max-width: 770px){
+    .fas{
+        vertical-align: top;
+    }
+    .ml-3{
+        margin-left: 0rem!important;
+    }
+    .centro{
+        margin-top: 3rem !important;
+        vertical-align: 0rem;
+    }
+}

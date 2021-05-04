@@ -86,21 +86,20 @@ $retorno = $_GET['retorno'];
             <tbody>
             <?php
             include ('../conexao.php');
-            $SQL = "select id_venda,data,id_cliente from tb_cliente";
+            $SQL = "select id_venda,data,id_cliente from tb_venda";
             $RS = mysqli_query($conexao,$SQL);
             $i = 1;
             while ($row = mysqli_fetch_assoc($RS)){
-                if(empty($row['cpf'])){
-                    $pessoa = 'cnpj';
-                }else{
-                    $pessoa = 'cpf';
-                }
+            $SQLCliente = "select nome from tb_cliente where id_cliente = " . $row["id_cliente"];
+            $RSCliente = mysqli_query($conexao,$SQLCliente);
+            $SQLItens = "select sum(quantidade * valor_unit) from tb_venda where id_venda = " . $row["id_venda"];//verificar
+            $RSItens = mysqli_query($conexao,$SQLItens);
                 echo "<tr>
                 <th>$i</th>
-                <td>" . $row["id_cliente"] . "</td>
-                <td>" . $row["nome"] . "</td>
-                <td>" . $row["$pessoa"] ."</td>
-                <td>" . $row["uf"] . "</td>
+                <td>" . $row["id_venda"] . "</td>
+                <td>" . $row["data"] . "</td>
+                <td>" . $RSCliente ."</td>
+                <td>" . $RSItens . "</td>
                 </tr>";
                 $i++;
              };
