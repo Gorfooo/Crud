@@ -102,7 +102,7 @@ $retorno = $_GET['retorno'];
                         <td class='centro'>" . $row["preco"] . "</td>
                         <td class='centro'>" . $row["custo"] . "</td>
                         <td class='centro'>" . $row["status"] . "</td>
-                        <td><i class='fas fa-pencil-alt'></i><i class='fas fa-times ml-3'></i></td>
+                        <td><i class='fas fa-pencil-alt' onclick='editaProduto();'></i><i class='fas fa-times ml-3' onclick='excluiProduto();'></i></td>
                         </tr>";
                         $i++;
                     };

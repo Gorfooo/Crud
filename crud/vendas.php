@@ -80,6 +80,7 @@ $retorno = $_GET['retorno'];
                     <th scope="col">Data</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Total</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -99,6 +100,7 @@ $retorno = $_GET['retorno'];
                 <td>" . $row["data"] . "</td>
                 <td>" . $row["data"] ."</td>
                 <td>" . $RSItens . "</td>
+                <td><i class='fas fa-pencil-alt'onclick='editaVenda();'></i><i class='fas fa-times ml-3'onclick='excluiVenda();'></i></td>
                 </tr>";
                 $i++;
              };

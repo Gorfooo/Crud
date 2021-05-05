@@ -100,6 +100,7 @@ $retorno = $_GET['retorno'];
                     <th scope="col">Nome</th>
                     <th scope="col">CPF/CNPJ</th>
                     <th scope="col">UF</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -120,6 +121,7 @@ $retorno = $_GET['retorno'];
                 <td>" . $row["nome"] . "</td>
                 <td>" . $row["$pessoa"] ."</td>
                 <td>" . $row["uf"] . "</td>
+                <td><i class='fas fa-pencil-alt'onclick='editaCliente();></i><i class='fas fa-times ml-3'onclick='excluiCliente();'></i></td>
                 </tr>";
                 $i++;
              };
