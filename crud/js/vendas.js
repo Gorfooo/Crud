@@ -1,28 +1,35 @@
-function enviaVenda() {
-    $('#form').submit();
-}
 $(function(){
     $('#fecharModal').css('cursor','pointer');
 })
+var itens = [];
 function enviaItem(){
     event.preventDefault();
+    if($('#produto').val() != "" && $('#preco').val() != "" && $('#quantidade').val() != ""){
+        itens.push($('#produto').val());
+        itens.push($('#preco').val());
+        itens.push($('#quantidade').val());
+        $('#produto').val("");
+        $('#preco').val("");
+        $('#quantidade').val("");
+        console.log(itens);
+    }else{
+        console.log('existem itens vazios');
+    }
+}
+function enviaVenda(){
+    event.preventDefault();
     $.ajax({
-        type:'POST',
+        type:'GET',
         url:'Valida/armazenaItem.php',
         dataType:'text',
         data:{
-            produto:$('#produto').val(),
-            quantidade:$('#quantidade').val(),
-            preco:$('#preco').val()
+            itens: itens
         },
-        success: function (data) {
-            // console.log(data.responseText);
-            $('#produto').val("");
-            $('#quantidade').val("");
-            $('#preco').val("");
-        },
-        error: function (request, status, error) {
-            console.log(request.responseText,status.responseText,error.responseText);
+        success:function(html){
+            
+        }, 
+        error:function(request, status, error){
+            console.log(request + status + error);
         }
-    })
+    });
 }

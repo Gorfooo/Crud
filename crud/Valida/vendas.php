@@ -27,11 +27,11 @@ else
 
 if ($preco > 999999999 || $quantidade > 999999999){
     $retorno = 1;
-    header("Location: ../produtos.php?retorno=".$retorno);
+    header("Location: ../vendas.php?retorno=".$retorno);
 }
 else if (empty($quantidade)||empty($preco)||empty($produto)||empty($data)||empty($cliente)){
     $retorno = 2;
-    header("Location: ../produtos.php?retorno=".$retorno);
+    header("Location: ../vendas.php?retorno=".$retorno);
 }
 
 $SQL = "insert into tb_venda(data,id_cliente)values('" . $data . "'," . $cliente . ")";

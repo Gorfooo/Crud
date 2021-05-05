@@ -13,7 +13,6 @@
     </script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!--  -->
     <script src="https://kit.fontawesome.com/00a4711f34.js" crossorigin="anonymous"></script>
     <!--  -->
     <link rel="stylesheet" type="text/css" href="css/vendas.css">
@@ -86,7 +85,7 @@ $retorno = $_GET['retorno'];
             <tbody>
             <?php
             include ('../conexao.php');
-            $SQL = "select id_venda,data,id_cliente from tb_venda";
+            $SQL = "select * from tb_venda";
             $RS = mysqli_query($conexao,$SQL);
             $i = 1;
             while ($row = mysqli_fetch_assoc($RS)){
@@ -98,7 +97,7 @@ $retorno = $_GET['retorno'];
                 <th>$i</th>
                 <td>" . $row["id_venda"] . "</td>
                 <td>" . $row["data"] . "</td>
-                <td>" . $RSCliente ."</td>
+                <td>" . $row["data"] ."</td>
                 <td>" . $RSItens . "</td>
                 </tr>";
                 $i++;
@@ -116,7 +115,7 @@ $retorno = $_GET['retorno'];
                         <div class='row'>
                             <div class='col'>
                                 <h2 class='text-center'>CADASTRO DA VENDA:</h2>
-                                <form class='form-group' id='form' action="Valida/vendas.php">
+                                <form class='form-group' id='form' >
                                     <div class="form-row mt-3">
                                         <div class='form-group col'>
                                             <label for="cliente">Cliente:</label>
