@@ -80,6 +80,12 @@ $retorno = $_GET['retorno'];
                 CEP Inválido!
             </div>
         </div>
+        <div class='mt-4'>
+            <div class="alert alert-danger text-center grid2" role="alert" id='excluiCliente'
+                style='height:70px;display:none'>
+                Não é possível excluir esse cliente!
+            </div>
+        </div>
     </div>
     <Div class='container'>
         <div class='row'>
@@ -103,7 +109,7 @@ $retorno = $_GET['retorno'];
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id='clientes'>
             <?php
             include ('../conexao.php');
             $SQL = "select id_cliente,nome,cpf,cnpj,uf from tb_cliente";
@@ -121,7 +127,8 @@ $retorno = $_GET['retorno'];
                 <td>" . $row["nome"] . "</td>
                 <td>" . $row["$pessoa"] ."</td>
                 <td>" . $row["uf"] . "</td>
-                <td><i class='fas fa-pencil-alt'onclick='editaCliente();></i><i class='fas fa-times ml-3'onclick='excluiCliente();'></i></td>
+                <td><i class='fas fa-pencil-alt'onclick='editaCliente(". $row["id_cliente"] .");'style='cursor:pointer'></i>
+                <i class='fas fa-times ml-3'onclick='excluiCliente(". $row["id_cliente"] .");'style='cursor:pointer'></i></td>
                 </tr>";
                 $i++;
              };

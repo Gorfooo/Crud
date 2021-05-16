@@ -61,6 +61,12 @@ $retorno = $_GET['retorno'];
                 Campo Vazio!
             </div>
         </div>
+        <div class='mt-4'>
+            <div class="alert alert-danger text-center grid2" role="alert" id='excluiProduto'
+                style='height:70px;display:none'>
+                Não é possível excluir esse produto!
+            </div>
+        </div>
     </div>
     <Div class='container'>
         <div class='row'>
@@ -74,7 +80,7 @@ $retorno = $_GET['retorno'];
         </div>
         <hr>
         <div class="table-responsive">
-            <table class="table table-hover"valign="bottom">
+            <table class="table table-hover" valign="bottom">
                 <thead class="thead-light table-striped">
                     <tr>
                         <th scope="col">#</th>
@@ -87,7 +93,7 @@ $retorno = $_GET['retorno'];
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id='produtos'>
                     <?php
                     include ('../conexao.php');
                     $SQL = "select id_produto,descricao,quantidade,preco,custo,status from tb_produto";
@@ -102,7 +108,8 @@ $retorno = $_GET['retorno'];
                         <td class='centro'>" . $row["preco"] . "</td>
                         <td class='centro'>" . $row["custo"] . "</td>
                         <td class='centro'>" . $row["status"] . "</td>
-                        <td><i class='fas fa-pencil-alt' onclick='editaProduto();'></i><i class='fas fa-times ml-3' onclick='excluiProduto();'></i></td>
+                        <td><i class='fas fa-pencil-alt' onclick='editaProduto(". $row["id_produto"] .");'style='cursor:pointer'></i>
+                        <i class='fas fa-times ml-3' onclick='excluiProduto(". $row["id_produto"] .");'style='cursor:pointer'></i></td>
                         </tr>";
                         $i++;
                     };
@@ -121,54 +128,57 @@ $retorno = $_GET['retorno'];
                             <div class='col'>
                                 <h2 class='text-center'>CADASTRO DO ITEM:</h2>
                             </div>
-                            <div class='col-1' onclick='window.open("produtos.php","_self")'>
-                                <i class="fas fa-times" id='fecharModal'></i>
+                            <div class='col-1'>
+                                <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
                             </div>
                         </div>
-                        <form class='form-group' id='form' action="Valida/produtos.php">
-                            <div class="form-row mt-3">
-                                <div class='form-group col'>
-                                    <label for="preco">Preço:</label>
-                                    <input type='number' name='preco' id='preco' class='form-control'>
-                                </div>
-                                <div class='form-group col'>
-                                    <label for="custo">Custo:</label>
-                                    <input type='number' name='custo' id='custo' class='form-control'>
-                                </div>
-                            </div>
-                            <div class='form-group'>
-                                <label for="descricao">Descrição:</label>
-                                <input type='text' name='descricao' id='descricao' class='form-control' maxlength="50">
-                            </div>
-                            <div class="form-row">
-                                <div class='form-group col'>
-                                    <label for="quantidade">Quantidade:</label>
-                                    <input type='number' name='quantidade' id='quantidade' class='form-control'>
-                                </div>
-                                <div class='form-group col'>
-                                    <label for="unidadeMedida">Unidade de medida:</label>
-                                    <select name="unidadeMedida" class='custom-select custom-select'>
-                                        <option value="unidade">UN</option>
-                                        <option value="kilograma">KG</option>
-                                        <option value="metro">MT</option>
-                                        <option value="metro cubico">M³</option>
-                                        <option value="tonelada">TON</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class='form-row'>
-                                <div class='form-group col'>
-                                    <div class='form-check'>
-                                        <input type='checkbox' name='status' id='status' class='form-check-input'
-                                            checked>
-                                        <label>Ativo</label>
+                        <div class='loadModal'>
+                            <form class='form-group' id='form' action='Valida/produtos.php'>
+                                <div class='form-row mt-3'>
+                                    <div class='form-group col'>
+                                        <label for='preco'>Preço:</label>
+                                        <input type='number' name='preco' id='preco' class='form-control'>
+                                    </div>
+                                    <div class='form-group col'>
+                                        <label for='custo'>Custo:</label>
+                                        <input type='number' name='custo' id='custo' class='form-control'>
                                     </div>
                                 </div>
-                                <div class='form-group col-md-2'>
-                                    <button class='btn btn-primary' onclick='enviaProduto();'>Salvar</button>
+                                <div class='form-group'>
+                                    <label for='descricao'>Descrição:</label>
+                                    <input type='text' name='descricao' id='descricao' class='form-control'
+                                        maxlength='50'>
                                 </div>
-                            </div>
-                        </form>
+                                <div class='form-row'>
+                                    <div class='form-group col'>
+                                        <label for='quantidade'>Quantidade:</label>
+                                        <input type='number' name='quantidade' id='quantidade' class='form-control'>
+                                    </div>
+                                    <div class='form-group col'>
+                                        <label for='unidadeMedida'>Unidade de medida:</label>
+                                        <select name='unidadeMedida' class='custom-select custom-select'>
+                                            <option value='unidade'>UN</option>
+                                            <option value='kilograma'>KG</option>
+                                            <option value='metro'>MT</option>
+                                            <option value='metro cubico'>M³</option>
+                                            <option value='tonelada'>TON</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='form-row'>
+                                    <div class='form-group col'>
+                                        <div class='form-check'>
+                                            <input type='checkbox' name='status' id='status' class='form-check-input'
+                                                checked>
+                                            <label>Ativo</label>
+                                        </div>
+                                    </div>
+                                    <div class='form-group col-md-2'>
+                                        <button class='btn btn-primary' onclick='enviaProduto();'>Salvar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

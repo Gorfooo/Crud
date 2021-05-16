@@ -57,7 +57,6 @@ $SQL = "insert into tb_produto (descricao, preco, id_unidade_medida, custo, quan
  }
  else
  {
-    $retorno = 3;
-    header("Location: ../produtos.php?retorno=".$retorno);
+    header("Location: ../produtos.php");
  }
 ?>

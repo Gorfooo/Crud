@@ -48,6 +48,17 @@ else if (retorno == 5)
 }
 
 $(function(){  
+    $('#excluiCliente').bind('click',function(){
+        $('#excluiCliente').fadeOut();
+    });
+})
+$(function(){  
+    $('#excluiCliente').bind('mouseover',function(){
+        $('#excluiCliente').css('cursor','pointer');
+    });
+})
+
+$(function(){  
     $('#limiteAlto').bind('click',function(){
         $('#limiteAlto').fadeOut();
     });
@@ -129,3 +140,50 @@ function enviaCliente(){
 $(function(){
     $('#fecharModal').css('cursor','pointer');
 })
+
+function excluiCliente(id){
+    $.ajax({
+        type:'POST',
+        url:'Valida/excluiCliente.php',
+        data:{
+            id: id
+        },
+	    dataType:'json',
+        success:function(json){
+            $('#clientes').load("Valida/loadClientes.php");
+        }, 
+        error:function(request, status, error){
+            console.log(request.responseText,status.responseText,error.responseText);
+            $('#clientes').load("Valida/loadClientes.php");
+            if(request.responseText.length>0){
+                $('#excluiCliente').fadeIn();
+            }
+            setTimeout(function() {
+                $('#excluiCliente').fadeOut();
+            }, 4000);
+        }
+    });
+}
+
+setTimeout(function() {
+    $('#excluiCliente').fadeOut();
+}, 4000);
+
+function editaCliente(id){
+    $('.modal').modal();
+    // $(".modal").load('loadModal.php?id=' + id);
+    $.ajax({
+        type:'POST',
+        url:'loadModal.php',
+        data:{
+            id: id
+        },
+	    dataType:'json',
+        success:function(json){
+            $('.loadModal').load('loadModal.php');
+        }, 
+        error:function(request, status, error){
+            console.log(request.responseText,status.responseText,error.responseText);
+        }
+    });
+}

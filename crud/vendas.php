@@ -100,7 +100,8 @@ $retorno = $_GET['retorno'];
                 <td>" . $row["data"] . "</td>
                 <td>" . $row["data"] ."</td>
                 <td>" . $RSItens . "</td>
-                <td><i class='fas fa-pencil-alt'onclick='editaVenda();'></i><i class='fas fa-times ml-3'onclick='excluiVenda();'></i></td>
+                <td><i class='fas fa-pencil-alt'onclick='editaVenda();'style='cursor:pointer'></i>
+                <i class='fas fa-times ml-3'onclick='excluiVenda();'style='cursor:pointer'></i></td>
                 </tr>";
                 $i++;
              };
