@@ -118,6 +118,7 @@ $retorno = $_GET['retorno'];
             </table>
         </div>
     </Div>
+    <div class='loadModal'>
     <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog">
@@ -132,7 +133,7 @@ $retorno = $_GET['retorno'];
                                 <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
                             </div>
                         </div>
-                        <div class='loadModal'>
+                        
                             <form class='form-group' id='form' action='Valida/produtos.php'>
                                 <div class='form-row mt-3'>
                                     <div class='form-group col'>
@@ -183,6 +184,7 @@ $retorno = $_GET['retorno'];
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

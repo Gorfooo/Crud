@@ -100,8 +100,8 @@ $retorno = $_GET['retorno'];
                 <td>" . $row["data"] . "</td>
                 <td>" . $row["data"] ."</td>
                 <td>" . $RSItens . "</td>
-                <td><i class='fas fa-pencil-alt'onclick='editaVenda();'style='cursor:pointer'></i>
-                <i class='fas fa-times ml-3'onclick='excluiVenda();'style='cursor:pointer'></i></td>
+                <td><i class='fas fa-pencil-alt'onclick='editaVenda(". $row["id_venda"] .");'style='cursor:pointer'></i>
+                <i class='fas fa-times ml-3'onclick='excluiVenda(". $row["id_venda"] .");'style='cursor:pointer'></i></td>
                 </tr>";
                 $i++;
              };
@@ -165,31 +165,13 @@ $retorno = $_GET['retorno'];
                                     <div class='col'>
                                         <h2 class='text-center'>ITENS DA VENDA:</h2>
                                     </div>
-                                    <div class='col-1' onclick='window.open("vendas.php","_self")'>
-                                        <i class="fas fa-times" id='fecharModal'></i>
+                                    <div class='col-1'>
+                                        <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
                                     </div>
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id='produtos'>
                                         <thead class='table-borderless'>
-                                            <tr>
-                                                <th scope="col"></th>
-                                                <th scope="col">Descrição</th>
-                                                <th scope="col">Quantidade</th>
-                                                <th scope="col">Preço</th>
-                                            </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                        <tbody >
                                         </tbody>
                                     </table>
                                 </div>

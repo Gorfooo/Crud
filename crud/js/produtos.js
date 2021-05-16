@@ -83,17 +83,17 @@ setTimeout(function() {
 }, 4000);
 
 function editaProduto(id){
-    $('.modal').modal();
-    // $(".modal").load('loadModal.php?id=' + id);
+    // $('.loadModal').load('loadModalProdutos.php?id='+id);
     $.ajax({
         type:'POST',
-        url:'loadModal.php',
+        url:'loadModalProdutos.php',
         data:{
             id: id
         },
-	    dataType:'json',
-        success:function(json){
-            $('.loadModal').load('loadModal.php');
+	    dataType:'text',
+        success:function(text){
+            $('.loadModal').load('loadModalProdutos.php');
+            $('.modal').modal();
         }, 
         error:function(request, status, error){
             console.log(request.responseText,status.responseText,error.responseText);

@@ -1,13 +1,13 @@
-<script src="js/produtos.js"></script>
 <?php
 include ('../conexao.php');
 $id = $_POST['id'];
+// $id = 5;
 
-$SQL = "select * from tb_produto where id = " . $id;
+$SQL = "select * from tb_produto where id_produto = " . $id;
 
 $RS = mysqli_query($conexao,$SQL);
-while ($row = mysqli_fetch_assoc($RS)){
-    $select = $row['id_unidade_medida'];
+$row = mysqli_fetch_assoc($RS);
+$select = $row['id_unidade_medida'];
     $select1 = '';
     $select2 = '';
     $select3 = '';
@@ -15,7 +15,7 @@ while ($row = mysqli_fetch_assoc($RS)){
     $select5 = '';
     if($select == 1){
         $select1 = 'selected';
-    } else if ($select == 2){
+    }else if ($select == 2){
         $select2 = 'selected';
     }else if ($select == 3){
         $select3 = 'selected';
@@ -31,8 +31,50 @@ while ($row = mysqli_fetch_assoc($RS)){
     } else {
         $status = '';
     }
+
+// var_dump($id,$SQL,$RS,$select,$status);
+// while ($row = mysqli_fetch_assoc($RS)){
+//     $select = $row['id_unidade_medida'];
+//     $select1 = '';
+//     $select2 = '';
+//     $select3 = '';
+//     $select4 = '';
+//     $select5 = '';
+//     if($select == 1){
+//         $select1 = 'selected';
+//     } else if ($select == 2){
+//         $select2 = 'selected';
+//     }else if ($select == 3){
+//         $select3 = 'selected';
+//     }else if ($select == 4){
+//         $select4 = 'selected';
+//     }else if ($select == 5){
+//         $select5 = 'selected';
+//     };
+
+//     $status = $row['status'];
+//     if ($status == 'A'){
+//         $status = 'checked';
+//     } else {
+//         $status = '';
+//     }
     
-    echo "<form class='form-group' id='form' action='Valida/produtos.php'>
+    echo "
+    <div class='modal fade bd-example-modal-lg' data-backdrop='static' tabindex='-1' role='dialog'
+    aria-labelledby='myLargeModalLabel'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <Div class='container'>
+                <div class='modal-body'>
+                    <div class='row'>
+                        <div class='col'>
+                            <h2 class='text-center'>CADASTRO DO ITEM:</h2>
+                        </div>
+                        <div class='col-1'>
+                            <i class='fas fa-times' id='fecharModal' data-dismiss='modal' aria-label='Close'></i>
+                        </div>
+                    </div>
+    <form class='form-group' id='form' action='Valida/produtos.php'>
 <div class='form-row mt-3'>
     <div class='form-group col'>
         <label for='preco'>Preço:</label>
@@ -74,6 +116,14 @@ while ($row = mysqli_fetch_assoc($RS)){
         <button class='btn btn-primary' onclick='enviaProduto();'>Salvar</button>
     </div>
 </div>
-</form>";
-}
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+";
+// }
+//fazer um if no ID para ver se já existe, se já existir, cria uma variável php e passa no enviaProduto,
+// nessa mesma função, fazer validação para executar comando update no editaProduto.php
 ?>

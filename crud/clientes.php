@@ -146,8 +146,8 @@ $retorno = $_GET['retorno'];
                             <div class='col'>
                                 <h2 class='text-center'>CADASTRO DO CLIENTE:</h2>
                             </div>
-                            <div class='col-1' onclick='window.open("vendas.php","_self")'>
-                                <i class="fas fa-times" id='fecharModal'></i>
+                            <div class='col-1'>
+                                <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
                             </div>
                         </div>
                         <form class='form-group' id='form' action="Valida/clientes.php">
