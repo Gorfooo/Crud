@@ -11,8 +11,10 @@ $(function(){
 })
 function enviaItem(){
     event.preventDefault();
-    if($('#produto').val() != "" && $('#preco').val() != "" && $('#quantidade').val() != ""){
-        itens.push($('#produto').val());
+    if($('#preco').val()>999999999 || $('#quantidade').val()>999999999){
+        console.log('valor muito alto');//aparecer msg
+    }else if($('#produto').val() != "" && $('#preco').val() != "" && $('#quantidade').val() != "" && $('#cliente').val() != "" && $('#data').val() != ""){
+        itens.push($('#produto').val().replaceAll("'",''));//testar
         itens.push($('#preco').val());
         itens.push($('#quantidade').val());
         $('#produtos').append("<tr><th scope='row'>"+i+"</th><td>"+itens[pos1]+"</td><td>"+itens[pos2]+"</td><td>"+itens[pos3]+"</td><td><i class='fas fa-times ml-3'onclick='excluiItem("+ i +");'style='cursor:pointer'></i></td></tr>")
@@ -24,7 +26,7 @@ function enviaItem(){
         pos2 = pos2 + 3;
         pos3 = pos3 + 3;
     }else{
-        console.log('existem itens vazios');
+        console.log('existem itens vazios');//aparecer msg
     }
 }
 
@@ -55,13 +57,27 @@ function enviaVenda(){
     event.preventDefault();
     $.ajax({
         type:'POST',
-        url:'Valida/armazenaItem.php',
+        url:'Valida/vendas.php',
         dataType:'text',
         data:{
-            itens: itens
+            cliente: $('#cliente').val(),
+            data: $('#data').val()
         },
         success:function(html){
-            console.log(html);
+            $.ajax({
+                type:'POST',
+                url:'Valida/armazenaItem.php',
+                dataType:'text',
+                data:{
+                    itens: itens
+                },
+                success:function(html){
+                    $('#form').submit();
+                }, 
+                error:function(request, status, error){
+                    console.log(request + status + error);
+                }
+            });
         }, 
         error:function(request, status, error){
             console.log(request + status + error);
