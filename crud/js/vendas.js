@@ -12,7 +12,7 @@ $(function(){
 function enviaItem(){
     event.preventDefault();
     if($('#preco').val()>999999999 || $('#quantidade').val()>999999999){
-        console.log('valor muito alto');//aparecer msg
+        $('#valorAlto').fadeIn();
     }else if($('#produto').val() != "" && $('#preco').val() != "" && $('#quantidade').val() != "" && $('#cliente').val() != "" && $('#data').val() != ""){
         itens.push($('#produto').val().replaceAll("'",''));//testar
         itens.push($('#preco').val());
@@ -26,9 +26,31 @@ function enviaItem(){
         pos2 = pos2 + 3;
         pos3 = pos3 + 3;
     }else{
-        console.log('existem itens vazios');//aparecer msg
+        $('#campoVazio').fadeIn();
     }
 }
+
+$(function(){  
+    $('#valorAlto').bind('click',function(){
+        $('#valorAlto').fadeOut();
+    });
+})
+$(function(){  
+    $('#valorAlto').bind('mouseover',function(){
+        $('#valorAlto').css('cursor','pointer');
+    });
+})
+
+$(function(){  
+    $('#campoVazio').bind('click',function(){
+        $('#campoVazio').fadeOut();
+    });
+})
+$(function(){  
+    $('#campoVazio').bind('mouseover',function(){
+        $('#campoVazio').css('cursor','pointer');
+    });
+})
 
 function excluiItem(cont){
     $('#produtos tr').remove();
@@ -63,24 +85,50 @@ function enviaVenda(){
             cliente: $('#cliente').val(),
             data: $('#data').val()
         },
-        success:function(html){
-            $.ajax({
-                type:'POST',
-                url:'Valida/armazenaItem.php',
-                dataType:'text',
-                data:{
-                    itens: itens
-                },
-                success:function(html){
-                    $('#form').submit();
-                }, 
-                error:function(request, status, error){
-                    console.log(request + status + error);
-                }
-            });
-        }, 
+        success:function(result){
+            console.log(result);
+        },
         error:function(request, status, error){
             console.log(request + status + error);
+        }
+    });
+    armazenaItem();
+}
+
+function armazenaItem(){
+    $.ajax({
+        type:'POST',
+        url:'Valida/armazenaItem.php',
+        dataType:'text',
+        data:{
+            itens: itens
+        },
+        success:function(result){
+            $('#form').submit();
+            $('#venda').load("Valida/loadVendas.php");
+            console.log(result);
+        }, 
+        error:function(result){
+            console.log(result);
+        }
+    });
+}
+
+function excluiVenda(id){
+    $.ajax({
+        type:'POST',
+        url:'Valida/excluiVenda.php',
+        data:{
+            id: id
+        },
+	    dataType:'json',
+        success: function (result) {
+            $('#venda').load("Valida/loadVendas.php");
+            console.log(result);
+        },
+        error: function (result) {
+            $('#venda').load("Valida/loadVendas.php");
+            console.log(result);
         }
     });
 }

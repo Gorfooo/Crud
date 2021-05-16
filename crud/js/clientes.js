@@ -1,189 +1,183 @@
-$(function(){
-    $("#pessoa").bind('click',function(){
-            $('#cpf').toggle();
-            $('#cnpj').toggle();
+$(function () {
+    $("#pessoa").bind('click', function () {
+        $('#cpf').toggle();
+        $('#cnpj').toggle();
     });
 });
 
-$(function(){
-    $('#cpfInput').mask('000.000.000-00', {reverse: true});
+$(function () {
+    $('#cpfInput').mask('000.000.000-00', {
+        reverse: true
+    });
 })
-$(function(){
-    $('#cnpjInput').mask('00.000.000/0000-00', {reverse: true});
+$(function () {
+    $('#cnpjInput').mask('00.000.000/0000-00', {
+        reverse: true
+    });
 })
-$(function(){
+$(function () {
     $('#cep').mask('00000-000');
 })
 
 var retorno = retorno;
-if(retorno == 1)
-{
-    $(function(){  
+if (retorno == 1) {
+    $(function () {
         $('#limiteAlto').fadeIn();
     })
-}
-else if (retorno == 2)
-{
-    $(function(){ 
+} else if (retorno == 2) {
+    $(function () {
         $('#campoVazio').fadeIn();
     })
-}
-else if (retorno == 3)
-{
-    $(function(){ 
+} else if (retorno == 3) {
+    $(function () {
         $('#CPFInvalido').fadeIn();
     })
-}
-else if (retorno == 4)
-{
-    $(function(){ 
+} else if (retorno == 4) {
+    $(function () {
         $('#CNPJInvalido').fadeIn();
     })
-}
-else if (retorno == 5)
-{
-    $(function(){ 
+} else if (retorno == 5) {
+    $(function () {
         $('#CEPInvalido').fadeIn();
     })
 }
 
-$(function(){  
-    $('#excluiCliente').bind('click',function(){
+$(function () {
+    $('#excluiCliente').bind('click', function () {
         $('#excluiCliente').fadeOut();
     });
 })
-$(function(){  
-    $('#excluiCliente').bind('mouseover',function(){
-        $('#excluiCliente').css('cursor','pointer');
+$(function () {
+    $('#excluiCliente').bind('mouseover', function () {
+        $('#excluiCliente').css('cursor', 'pointer');
     });
 })
 
-$(function(){  
-    $('#limiteAlto').bind('click',function(){
+$(function () {
+    $('#limiteAlto').bind('click', function () {
         $('#limiteAlto').fadeOut();
     });
 })
-$(function(){  
-    $('#limiteAlto').bind('mouseover',function(){
-        $('#limiteAlto').css('cursor','pointer');
+$(function () {
+    $('#limiteAlto').bind('mouseover', function () {
+        $('#limiteAlto').css('cursor', 'pointer');
     });
 })
 
-$(function(){  
-    $('#campoVazio').bind('click',function(){
+$(function () {
+    $('#campoVazio').bind('click', function () {
         $('#campoVazio').fadeOut();
     });
 })
-$(function(){  
-    $('#campoVazio').bind('mouseover',function(){
-        $('#campoVazio').css('cursor','pointer');
+$(function () {
+    $('#campoVazio').bind('mouseover', function () {
+        $('#campoVazio').css('cursor', 'pointer');
     });
 })
 
-$(function(){  
-    $('#CPFInvalido').bind('click',function(){
+$(function () {
+    $('#CPFInvalido').bind('click', function () {
         $('#CPFInvalido').fadeOut();
     });
 })
-$(function(){  
-    $('#CPFInvalido').bind('mouseover',function(){
-        $('#CPFInvalido').css('cursor','pointer');
+$(function () {
+    $('#CPFInvalido').bind('mouseover', function () {
+        $('#CPFInvalido').css('cursor', 'pointer');
     });
 })
 
-$(function(){  
-    $('#CNPJInvalido').bind('click',function(){
+$(function () {
+    $('#CNPJInvalido').bind('click', function () {
         $('#CNPJInvalido').fadeOut();
     });
 })
-$(function(){  
-    $('#CNPJInvalido').bind('mouseover',function(){
-        $('#CNPJInvalido').css('cursor','pointer');
+$(function () {
+    $('#CNPJInvalido').bind('mouseover', function () {
+        $('#CNPJInvalido').css('cursor', 'pointer');
     });
 })
 
-$(function(){  
-    $('#CEPInvalido').bind('click',function(){
+$(function () {
+    $('#CEPInvalido').bind('click', function () {
         $('#CEPInvalido').fadeOut();
     });
 })
-$(function(){  
-    $('#CEPInvalido').bind('mouseover',function(){
-        $('#CEPInvalido').css('cursor','pointer');
+$(function () {
+    $('#CEPInvalido').bind('mouseover', function () {
+        $('#CEPInvalido').css('cursor', 'pointer');
     });
 })
 
-setTimeout(function() {
+setTimeout(function () {
     $('#limiteAlto').fadeOut();
 }, 3000);
 
-setTimeout(function() {
+setTimeout(function () {
     $('#campoVazio').fadeOut();
 }, 3000);
 
-setTimeout(function() {
+setTimeout(function () {
     $('#CPFInvalido').fadeOut();
 }, 3000);
 
-setTimeout(function() {
+setTimeout(function () {
     $('#CNPJInvalido').fadeOut();
 }, 3000);
 
-setTimeout(function() {
+setTimeout(function () {
     $('#CEPInvalido').fadeOut();
 }, 3000);
 
-function enviaCliente(){
+setTimeout(function () {
+    $('#excluiCliente').fadeOut();
+}, 3000);
+
+function enviaCliente() {
     $('#form').submit();
 }
 
-$(function(){
-    $('#fecharModal').css('cursor','pointer');
+$(function () {
+    $('#fecharModal').css('cursor', 'pointer');
 })
 
-function excluiCliente(id){
+function excluiCliente(id) {
     $.ajax({
-        type:'POST',
-        url:'Valida/excluiCliente.php',
-        data:{
+        type: 'POST',
+        url: 'Valida/excluiCliente.php',
+        data: {
             id: id
         },
-	    dataType:'json',
-        success:function(json){
+        dataType: 'json',
+        // }).done(function(result){
+        //     $('#clientes').load("Valida/loadClientes.php");
+        //     console.log(result);
+        // })
+        success: function (result) {
             $('#clientes').load("Valida/loadClientes.php");
-        }, 
-        error:function(request, status, error){
-            console.log(request.responseText,status.responseText,error.responseText);
+            console.log(result);
+        },
+        error: function (result) {
             $('#clientes').load("Valida/loadClientes.php");
-            if(request.responseText.length>0){
-                $('#excluiCliente').fadeIn();
+            console.log(result);
+        }
+    }); //$('#excluiCliente').fadeIn();
+}
+
+    function editaCliente(id) {
+        $('.modal').modal();
+        // $(".modal").load('loadModal.php?id=' + id);
+        $.ajax({
+            type: 'POST',
+            url: 'loadModal.php',
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function (json) {
+                $('.loadModal').load('loadModal.php');
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText, status.responseText, error.responseText);
             }
-            setTimeout(function() {
-                $('#excluiCliente').fadeOut();
-            }, 4000);
-        }
-    });
-}
-
-setTimeout(function() {
-    $('#excluiCliente').fadeOut();
-}, 4000);
-
-function editaCliente(id){
-    $('.modal').modal();
-    // $(".modal").load('loadModal.php?id=' + id);
-    $.ajax({
-        type:'POST',
-        url:'loadModal.php',
-        data:{
-            id: id
-        },
-	    dataType:'json',
-        success:function(json){
-            $('.loadModal').load('loadModal.php');
-        }, 
-        error:function(request, status, error){
-            console.log(request.responseText,status.responseText,error.responseText);
-        }
-    });
-}
+        });
+    }

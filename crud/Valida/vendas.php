@@ -4,7 +4,7 @@ $cliente = $_POST['cliente'];
 $data = $_POST['data'];
 
 $SQLCliente = "select id_cliente from tb_cliente where nome = '" . $cliente . "'";
-if(!($RSCliente = mysqli_query($conexao,$SQLCliente)))
+if(!($RSCliente = mysqli_query($conexao,$SQLCliente)))//retornar parâmetro que não conseguiu encontrar cliente e finaliza a operação
 {
     $erro = mysqli_error($conexao);
     echo $erro;
@@ -17,7 +17,7 @@ $row = mysqli_fetch_assoc($RSCliente);
 $id_cliente = $row['id_cliente'];
 
 $SQL = "insert into tb_venda(data,id_cliente)values('" . $data . "'," . $id_cliente . ")";
-if(!(mysqli_query($conexao,$SQL)))
+if(!(mysqli_query($conexao,$SQL)))//retornar parâmetro que não conseguiu registrar a venda e finaliza a operação
 {
     $erro = mysqli_error($conexao);
     echo $erro;

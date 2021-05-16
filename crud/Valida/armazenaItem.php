@@ -6,7 +6,7 @@ $i = 0;
 $produto = [];
 while ($i < sizeof($itens)){
     $SQLProduto = "select id_produto from tb_produto where descricao = '" . $itens[$i] . "'";
-    if(!($RSProduto = mysqli_query($conexao,$SQLProduto))){
+    if(!($RSProduto = mysqli_query($conexao,$SQLProduto))){//retornar parâmetro que não conseguiu encontrar produto
         $erro = mysqli_error($conexao);
          echo $erro;
          echo ("<br>");
@@ -18,16 +18,9 @@ while ($i < sizeof($itens)){
     $i = $i + 3;
 }
 
-$SQLVenda = 'select max(id_venda) from tb_venda';
-if(!($RS = mysqli_query($conexao,$SQLVenda))){
-    $erro = mysqli_error($conexao);
-     echo $erro;
-     echo ("<br>");
-     echo $SQL;
-     echo ("<br>");
-};
-$row = mysqli_fetch_assoc($RS);
-$IDVenda = $row['max(id_venda)'];
+$SQLVenda = "SHOW TABLE STATUS LIKE 'tb_venda'";
+$RS = mysqli_query($conexao, $SQLVenda) or die (mysqli_error($conexao));
+$row = mysqli_fetch_array($RS);
 
 $preco = [];
 $quantidade = [];
@@ -44,14 +37,9 @@ while ($i < sizeof($itens)){
 
 $i = 0;
 while ($i < sizeof($produto)){
-    $SQL = "insert into tb_produto_venda(id_produto,id_venda,valor_unit,quantidade)values(" . $produto[$i] . "," . $IDVenda . "," . $preco[$i] . "," . $quantidade[$i] . ");";
-    if(!($RS = mysqli_query($conexao,$SQL))){
-        $erro = mysqli_error($conexao);
-        echo $erro;
-        echo ("<br>");
-        echo $SQL;
-        echo ("<br>");
-    };
+    $SQL = "insert into tb_produto_venda(id_produto,id_venda,valor_unit,quantidade)values(" . $produto[$i] . "," . ($row['Auto_increment']-1) . "," . $preco[$i] . "," . $quantidade[$i] . ");";
+    // echo $SQL;
+    mysqli_query($conexao, $SQL) or die (mysqli_error($conexao));//retornar parâmetro que não conseguiu registrar item da venda
     $i++;
 }
 ?>

@@ -46,6 +46,9 @@ setTimeout(function() {
 setTimeout(function() {
     $('#campoVazio').fadeOut();
 }, 3000);
+setTimeout(function() {
+    $('#excluiProduto').fadeOut();
+}, 4000);
 
 $(function(){
     $('#fecharModal').css('cursor','pointer');
@@ -62,25 +65,16 @@ function excluiProduto(id){
         data:{
             id: id
         },
-	    dataType:'json',
-        success:function(json){
+	    dataType:'text',
+        success:function(result){
             $('#produtos').load("Valida/loadProdutos.php");
+            console.log(result);//$('#excluiProduto').fadeIn();
         }, 
-        error:function(request, status, error){
-            console.log(request.responseText,status.responseText,error.responseText);
-            if(request.responseText.length>0){
-                $('#excluiProduto').fadeIn();
-            }
-            setTimeout(function() {
-                $('#excluiProduto').fadeOut();
-            }, 4000);
+        error:function(result){
+            console.log(result);
         }
     });
 }
-
-setTimeout(function() {
-    $('#excluiProduto').fadeOut();
-}, 4000);
 
 function editaProduto(id){
     // $('.loadModal').load('loadModalProdutos.php?id='+id);
