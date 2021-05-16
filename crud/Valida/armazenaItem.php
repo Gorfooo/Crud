@@ -6,13 +6,12 @@ $i = 0;
 $produto = [];
 while ($i < sizeof($itens)){
     $SQLProduto = "select id_produto from tb_produto where descricao = '" . $itens[$i] . "'";
-    if(!($RSProduto = mysqli_query($conexao,$SQLProduto))){//retornar parâmetro que não conseguiu encontrar produto
-        $erro = mysqli_error($conexao);
-         echo $erro;
-         echo ("<br>");
-         echo $SQL;
-         echo ("<br>");
-    };
+    if(!mysqli_query($conexao,$SQLProduto))
+{
+    $erro["retornado"] = mysqli_error($conexao);//validar antes de inserir a venda (arquivo Valida/vendas.php)
+    $erro["codigo"] = 3;
+    echo json_encode($erro);
+}
     $row = mysqli_fetch_assoc($RSProduto);
     array_push($produto,$row['id_produto']);
     $i = $i + 3;
@@ -38,8 +37,12 @@ while ($i < sizeof($itens)){
 $i = 0;
 while ($i < sizeof($produto)){
     $SQL = "insert into tb_produto_venda(id_produto,id_venda,valor_unit,quantidade)values(" . $produto[$i] . "," . ($row['Auto_increment']-1) . "," . $preco[$i] . "," . $quantidade[$i] . ");";
-    // echo $SQL;
-    mysqli_query($conexao, $SQL) or die (mysqli_error($conexao));//retornar parâmetro que não conseguiu registrar item da venda
+    if(!mysqli_query($conexao,$SQL))
+    {
+        $erro["retornado"] = mysqli_error($conexao);
+        $erro["codigo"] = 4;
+        echo json_encode($erro);
+    }
     $i++;
 }
 ?>

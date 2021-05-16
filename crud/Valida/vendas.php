@@ -4,25 +4,20 @@ $cliente = $_POST['cliente'];
 $data = $_POST['data'];
 
 $SQLCliente = "select id_cliente from tb_cliente where nome = '" . $cliente . "'";
-if(!($RSCliente = mysqli_query($conexao,$SQLCliente)))//retornar parâmetro que não conseguiu encontrar cliente e finaliza a operação
+if(!mysqli_query($conexao,$SQLCliente))
 {
-    $erro = mysqli_error($conexao);
-    echo $erro;
-    echo ("<br>");
-    echo $SQL;
-    echo ("<br>");
-    return false;//testar
+    $erro["retornado"] = mysqli_error($conexao);
+    $erro["codigo"] = 1;
+    echo json_encode($erro);
 }
 $row = mysqli_fetch_assoc($RSCliente);
 $id_cliente = $row['id_cliente'];
 
 $SQL = "insert into tb_venda(data,id_cliente)values('" . $data . "'," . $id_cliente . ")";
-if(!(mysqli_query($conexao,$SQL)))//retornar parâmetro que não conseguiu registrar a venda e finaliza a operação
+if(!mysqli_query($conexao,$SQL))
 {
-    $erro = mysqli_error($conexao);
-    echo $erro;
-    echo ("<br>");
-    echo $SQL;
-    echo ("<br>");
+    $erro["retornado"] = mysqli_error($conexao);
+    $erro["codigo"] = 2;
+    echo json_encode($erro);
 }
 ?>

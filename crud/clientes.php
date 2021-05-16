@@ -83,7 +83,7 @@ $retorno = $_GET['retorno'];
         <div class='mt-4'>
             <div class="alert alert-danger text-center grid2" role="alert" id='excluiCliente'
                 style='height:70px;display:none'>
-                Não é possível excluir esse cliente!
+                Não é possível excluir esse cliente! Mensagem original: 
             </div>
         </div>
     </div>

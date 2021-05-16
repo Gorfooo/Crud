@@ -130,7 +130,7 @@ setTimeout(function () {
 
 setTimeout(function () {
     $('#excluiCliente').fadeOut();
-}, 3000);
+}, 5000);
 
 function enviaCliente() {
     $('#form').submit();
@@ -148,20 +148,47 @@ function excluiCliente(id) {
             id: id
         },
         dataType: 'json',
-        // }).done(function(result){
-        //     $('#clientes').load("Valida/loadClientes.php");
-        //     console.log(result);
-        // })
         success: function (result) {
             $('#clientes').load("Valida/loadClientes.php");
-            console.log(result);
+            mensagem = result.retornado;
+            codigo = result.codigo;
+            if (codigo == 6){
+                $('#excluiCliente').html('');
+                $('#excluiCliente').append('Não é possível excluir esse cliente! Mensagem original: '+mensagem);
+                $('#excluiCliente').fadeIn();
+                setTimeout(function () {
+                    $('#excluiCliente').fadeOut();
+                }, 5000);
+            }
         },
         error: function (result) {
             $('#clientes').load("Valida/loadClientes.php");
             console.log(result);
+            // console.log(result.responseText);
+            // var json = result.responseText;
+            // var jsonParsed = JSON.parse(json);
+            // console.log(jsonParsed.retornado);
+            // console.log(jsonParsed.codigo);
+            // console.log(result.retornado);
+            // console.log(result.codigo);
         }
-    }); //$('#excluiCliente').fadeIn();
+    });
 }
+
+// function excluiCliente(id) {
+//     $.ajax({
+//         type: 'POST',
+//         url: 'Valida/excluiCliente.php',
+//         data: {
+//             id: id
+//         },
+//         dataType: 'json',
+//         }).done(function(result){
+//             $('#clientes').load("Valida/loadClientes.php");
+//             console.log(result);
+//         })
+//  //$('#excluiCliente').fadeIn();
+// }
 
     function editaCliente(id) {
         $('.modal').modal();
