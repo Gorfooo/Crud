@@ -2,16 +2,20 @@
 include ('../../conexao.php');
 $cliente = $_POST['cliente'];
 $data = $_POST['data'];
+$itens = $_POST['itens'];
 
-$SQLCliente = "select id_cliente from tb_cliente where nome = '" . $cliente . "'";
-if(!mysqli_query($conexao,$SQLCliente))
+$SQLCPF = "select nome,id_cliente from tb_cliente where cpf = '" . $cliente . "'";
+$SQLCNPJ = "select nome,id_cliente from tb_cliente where cnpj = '" . $cliente . "'"; 
+if(!($RSCPF = mysqli_query($conexao,$SQLCPF)) || !($RSCNPJ = mysqli_query($conexao,$SQLCNPJ)))
 {
     $erro["retornado"] = mysqli_error($conexao);
     $erro["codigo"] = 1;
     echo json_encode($erro);
+    exit;//testar
 }
-$row = mysqli_fetch_assoc($RSCliente);
-$id_cliente = $row['id_cliente'];
+$RowCpf = mysqli_fetch_assoc($RSCPF);
+$id_cpf = $RowCpf['id_cliente'];
+$nome_cpf = 
 
 $SQL = "insert into tb_venda(data,id_cliente)values('" . $data . "'," . $id_cliente . ")";
 if(!mysqli_query($conexao,$SQL))

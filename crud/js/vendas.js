@@ -9,11 +9,60 @@ var pos3 = 2;
 $(function(){
     $('#produtos>tbody').append("<tr><th scope='row'></th>#<td><b>Descrição</b></td><td><b>Quantidade</b></td><td><b>Preço</b></td></tr>");
 })
+$(function(){
+    $('#cliente').bind('focus',function(){
+        $(this).removeClass('border-danger');
+    });
+    $('#produto').bind('focus',function(){
+        $(this).removeClass('border-danger');
+    });
+    $('#quantidade').bind('focus',function(){
+        $(this).removeClass('border-danger');
+    });
+    $('#data').bind('focus',function(){
+        $(this).removeClass('border-danger');
+    });
+    $('#preco').bind('focus',function(){
+        $(this).removeClass('border-danger');
+    });
+})
 function enviaItem(){
+    var executa = true;
     event.preventDefault();
-    if($('#preco').val()>999999999 || $('#quantidade').val()>999999999){
-        $('#valorAlto').fadeIn();
-    }else if($('#produto').val() != "" && $('#preco').val() != "" && $('#quantidade').val() != "" && $('#cliente').val() != "" && $('#data').val() != ""){
+    $('#preco').removeClass('border-danger');
+    $('#quantidade').removeClass('border-danger');
+    $('#produto').removeClass('border-danger');
+    $('#cliente').removeClass('border-danger');
+    $('#data').removeClass('border-danger');
+    if($('#preco').val()>999999999){
+        $('#preco').addClass('border-danger');
+        executa = false;
+    }
+    if ($('#quantidade').val()>999999999){
+        $('#quantidade').addClass('border-danger');
+        executa = false;
+    }
+    if ($('#produto').val() == ""){
+        $('#produto').addClass('border-danger');
+        executa = false;
+    }
+    if ($('#preco').val() == ""){
+        $('#preco').addClass('border-danger');
+        executa = false;
+    }
+    if ($('#quantidade').val() == ""){
+        $('#quantidade').addClass('border-danger');
+        executa = false;
+    }
+    if ($('#cliente').val() == ""){
+        $('#cliente').addClass('border-danger');
+        executa = false;
+    }
+    if ($('#data').val() == ""){
+        $('#data').addClass('border-danger');
+        executa = false;
+    }
+    if(executa == true){
         itens.push($('#produto').val().replaceAll("'",''));//testar
         itens.push($('#preco').val());
         itens.push($('#quantidade').val());
@@ -25,32 +74,8 @@ function enviaItem(){
         pos1 = pos1 + 3;
         pos2 = pos2 + 3;
         pos3 = pos3 + 3;
-    }else{
-        $('#campoVazio').fadeIn();
     }
 }
-
-$(function(){  
-    $('#valorAlto').bind('click',function(){
-        $('#valorAlto').fadeOut();
-    });
-})
-$(function(){  
-    $('#valorAlto').bind('mouseover',function(){
-        $('#valorAlto').css('cursor','pointer');
-    });
-})
-
-$(function(){  
-    $('#campoVazio').bind('click',function(){
-        $('#campoVazio').fadeOut();
-    });
-})
-$(function(){  
-    $('#campoVazio').bind('mouseover',function(){
-        $('#campoVazio').css('cursor','pointer');
-    });
-})
 
 function excluiItem(cont){
     $('#produtos tr').remove();
@@ -80,8 +105,9 @@ function enviaVenda(){
     $.ajax({
         type:'POST',
         url:'Valida/vendas.php',
-        dataType:'text',
+        dataType:'json',
         data:{
+            itens: itens,
             cliente: $('#cliente').val(),
             data: $('#data').val()
         },
@@ -92,27 +118,27 @@ function enviaVenda(){
             console.log(request + status + error);
         }
     });
-    armazenaItem();
+    // armazenaItem();
 }
 
-function armazenaItem(){
-    $.ajax({
-        type:'POST',
-        url:'Valida/armazenaItem.php',
-        dataType:'text',
-        data:{
-            itens: itens
-        },
-        success:function(result){
-            $('#form').submit();
-            $('#venda').load("Valida/loadVendas.php");
-            console.log(result);
-        }, 
-        error:function(result){
-            console.log(result);
-        }
-    });
-}
+// function armazenaItem(){
+//     $.ajax({
+//         type:'POST',
+//         url:'Valida/armazenaItem.php',
+//         dataType:'text',
+//         data:{
+//             itens: itens
+//         },
+//         success:function(result){
+//             $('#form').submit();
+//             $('#venda').load("Valida/loadVendas.php");
+//             console.log(result);
+//         }, 
+//         error:function(result){
+//             console.log(result);
+//         }
+//     });
+// }
 
 function excluiVenda(id){
     $.ajax({

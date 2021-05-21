@@ -47,22 +47,8 @@ $retorno = $_GET['retorno'];
             <a class="navbar-brand text-white" href="#" onclick='window.open("../index.php","_self")'>Sair</a>
         </div>
     </nav>
-    <div class='container'>
-        <div class='mt-4'>
-            <div class="alert alert-danger text-center grid2" role="alert" id='valorAlto'
-                style='height:70px;display:none'>
-                Valor muito alto!
-            </div>
-        </div>
-        <div class='mt-4'>
-            <div class="alert alert-danger text-center grid2" role="alert" id='campoVazio'
-                style='height:70px;display:none'>
-                Campo Vazio!
-            </div>
-        </div>
-    </div>
     <Div class='container'>
-        <div class='row'>
+        <div class='row mt-4'>
             <div class='col'>
                 <h1 class='text-primary'>Registrar Venda</h1>
             </div>
@@ -117,6 +103,9 @@ $retorno = $_GET['retorno'];
             <div class="modal-content">
                 <Div class='container'>
                     <div class="modal-body">
+                        <div class='text-right'>
+                            <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
+                        </div>
                         <div class='row'>
                             <div class='col'>
                                 <h2 class='text-center'>CADASTRO DA VENDA:</h2>
@@ -167,18 +156,16 @@ $retorno = $_GET['retorno'];
                                     <div class='col'>
                                         <h2 class='text-center'>ITENS DA VENDA:</h2>
                                     </div>
-                                    <div class='col-1'>
-                                        <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
-                                    </div>
                                     <table class="table table-hover" id='produtos'>
                                         <thead class='table-borderless'>
                                         </thead>
                                         <tbody >
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class='fixed-bottom salvar mb-5 mr-4'>
-                                    <button class='btn btn-primary d-flex'onclick='enviaVenda();'>Salvar</button>
+                                    <div class='fixed-bottom mb-5 mr-4' style='left:auto'>
+                                        <button class='btn btn-primary'onclick='enviaVenda();'>Salvar</button>
+                                    </div>
+                                    <!-- ajustar -->
                                 </div>
                             </div>
                         </div>

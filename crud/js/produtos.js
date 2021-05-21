@@ -68,7 +68,16 @@ function excluiProduto(id){
 	    dataType:'text',
         success:function(result){
             $('#produtos').load("Valida/loadProdutos.php");
-            console.log(result);//$('#excluiProduto').fadeIn();
+            mensagem = result.retornado;
+            codigo = result.codigo;
+            if (codigo == 3){
+                $('#excluiProduto').html('');
+                $('#excluiProduto').append('Não é possível excluir esse produto! Mensagem original: '+mensagem);
+                $('#excluiProduto').fadeIn();
+                setTimeout(function () {
+                    $('#excluiProduto').fadeOut();
+                }, 5000);
+            }
         }, 
         error:function(result){
             console.log(result);
