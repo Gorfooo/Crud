@@ -86,6 +86,12 @@ $retorno = $_GET['retorno'];
                 Não é possível excluir esse cliente! Mensagem original: 
             </div>
         </div>
+        <div class='mt-4'>
+            <div class="alert alert-danger text-center grid2" role="alert" id='ClienteCadastrado'
+                style='height:70px;display:none'>
+                Cliente já cadastrado! 
+            </div>
+        </div>
     </div>
     <Div class='container'>
         <div class='row'>

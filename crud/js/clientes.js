@@ -40,7 +40,22 @@ if (retorno == 1) {
     $(function () {
         $('#CEPInvalido').fadeIn();
     })
+}else if (retorno == 7) {
+    $(function () {
+        $('#ClienteCadastrado').fadeIn();
+    })
 }
+
+$(function () {
+    $('#ClienteCadastrado').bind('click', function () {
+        $('#ClienteCadastrado').fadeOut();
+    });
+})
+$(function () {
+    $('#ClienteCadastrado').bind('mouseover', function () {
+        $('#ClienteCadastrado').css('cursor', 'pointer');
+    });
+})
 
 $(function () {
     $('#excluiCliente').bind('click', function () {
@@ -109,6 +124,10 @@ $(function () {
 })
 
 setTimeout(function () {
+    $('#ClienteCadastrado').fadeOut();
+}, 3000);
+
+setTimeout(function () {
     $('#limiteAlto').fadeOut();
 }, 3000);
 
@@ -174,21 +193,6 @@ function excluiCliente(id) {
         }
     });
 }
-
-// function excluiCliente(id) {
-//     $.ajax({
-//         type: 'POST',
-//         url: 'Valida/excluiCliente.php',
-//         data: {
-//             id: id
-//         },
-//         dataType: 'json',
-//         }).done(function(result){
-//             $('#clientes').load("Valida/loadClientes.php");
-//             console.log(result);
-//         })
-//  //$('#excluiCliente').fadeIn();
-// }
 
     function editaCliente(id) {
         $('.modal').modal();

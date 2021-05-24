@@ -26,9 +26,103 @@ $(function(){
         $(this).removeClass('border-danger');
     });
 })
+
+$(function () {
+    $('#cliente').mask('00.000.000/0000-00', {
+        reverse: true
+    });
+    $("#cliente").mousedown(function() {
+        if($('#cliente').val().length == 0){
+            $('#cliente').mask('00.000.000/0000-00', {
+                reverse: true
+            });
+        }else if($('#cliente').val().length == 14){ 
+            $('#cliente').mask('00.000.000/0000-00', {
+                reverse: true
+            });
+        }
+    })
+    $("#cliente").click(function() {
+        // var x = event.keyCode;
+            if($('#cliente').val().length <= 14){  
+                $('#cliente').mask('000.000.000-00', {
+                    reverse: true
+                });
+            }else{
+                $('#cliente').mask('00.000.000/0000-00', {
+                    reverse: true
+                });
+            }
+      });
+    $("#cliente").keydown(function() {
+        var x = event.keyCode;
+        if(x == 86 || x == 96 || x == 97 || x == 98 || x == 99 || x == 100 || x == 101 || x == 102 || x == 103 || x == 104 || x == 105 || x == 48 || x == 49 || x == 50 || x == 51 || x == 52 || x == 53 || x == 54 || x == 55 || x == 56 || x == 57){
+            if($('#cliente').val().length == 0){
+                $('#cliente').mask('00.000.000/0000-00', {
+                    reverse: true
+                });
+            }else if($('#cliente').val().length == 14){ 
+                $('#cliente').mask('00.000.000/0000-00', {
+                    reverse: true
+                });
+            }
+        }
+    })
+    $("#cliente").keyup(function() {
+        var x = event.keyCode;
+            if($('#cliente').val().length <= 14){  
+                $('#cliente').mask('000.000.000-00', {
+                    reverse: true
+                });
+            }else{
+                $('#cliente').mask('00.000.000/0000-00', {
+                    reverse: true
+                });
+            }
+      });
+})
+
+function limpaModal(){
+    if (erro == 1 || erro == 2){
+        //caso ocorrer erro na inserção irá manter os dados para tentar enviar novamente
+    }else{
+        $('#cliente').val('');
+        $('#data').val('');
+        $('#produto').val('');
+        $('#quantidade').val('');
+        $('#preco').val('');
+        itens = [];
+        $('#produtos tr').remove();
+        $('#produtos>tbody').append("<tr><th scope='row'></th>#<td><b>Descrição</b></td><td><b>Quantidade</b></td><td><b>Preço</b></td></tr>");
+    }
+}
+
+function validaProduto(){
+    event.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'Valida/validaProduto.php',
+        dataType:'json',
+        data:{
+            produto: $('#produto').val()
+        },
+        success:function(result){
+            var retorno = result.retorno;
+            if (retorno == 1){
+                enviaItem();
+            }else{
+                $('#produto').addClass('border-danger');
+            }
+        },
+        error:function(request, status, error){
+            console.log(request + status + error);
+        }
+    });
+    
+}
+
 function enviaItem(){
     var executa = true;
-    event.preventDefault();
     $('#preco').removeClass('border-danger');
     $('#quantidade').removeClass('border-danger');
     $('#produto').removeClass('border-danger');
@@ -100,6 +194,35 @@ function excluiItem(cont){
     }
 }
 
+setTimeout(function () {
+    $('#erroInserirVenda').fadeOut();
+}, 3000);
+$(function () {
+    $('#erroInserirVenda').bind('click', function () {
+        $('#erroInserirVenda').fadeOut();
+    });
+})
+$(function () {
+    $('#erroInserirVenda').bind('mouseover', function () {
+        $('#erroInserirVenda').css('cursor', 'pointer');
+    });
+})
+
+setTimeout(function () {
+    $('#erroInserirItensVenda').fadeOut();
+}, 3000);
+$(function () {
+    $('#erroInserirItensVenda').bind('click', function () {
+        $('#erroInserirItensVenda').fadeOut();
+    });
+})
+$(function () {
+    $('#erroInserirItensVenda').bind('mouseover', function () {
+        $('#erroInserirItensVenda').css('cursor', 'pointer');
+    });
+})
+
+erro = '';
 function enviaVenda(){
     event.preventDefault();
     $.ajax({
@@ -112,33 +235,56 @@ function enviaVenda(){
             data: $('#data').val()
         },
         success:function(result){
-            console.log(result);
+            erro = result.codigo;
+            if(result.codigo == 1){
+                $('.modal').modal('hide');
+                $('#erroInserirVenda').html('');
+                $('#erroInserirVenda').append('Erro ao inserir venda! Mensagem original: ' + result.retornado);
+                $('#erroInserirVenda').fadeIn();
+            }else if (result.codigo == 2){
+                $('.modal').modal('hide');
+                $('#erroInserirItensVenda').append('Erro ao inserir itens da venda! Mensagem original: ' + result.retornado);
+                $('#erroInserirItensVenda').fadeIn();
+            }else{
+                $('.modal').modal('hide');
+                $('#venda').load("Valida/loadVendas.php");
+            }
+            setTimeout(function () {
+                $('#erroInserirVenda').fadeOut();
+            }, 5000);
+            setTimeout(function () {
+                $('#erroInserirItensVenda').fadeOut();
+            }, 3000);
+            limpaModal();
         },
         error:function(request, status, error){
             console.log(request + status + error);
         }
     });
-    // armazenaItem();
 }
 
-// function armazenaItem(){
-//     $.ajax({
-//         type:'POST',
-//         url:'Valida/armazenaItem.php',
-//         dataType:'text',
-//         data:{
-//             itens: itens
-//         },
-//         success:function(result){
-//             $('#form').submit();
-//             $('#venda').load("Valida/loadVendas.php");
-//             console.log(result);
-//         }, 
-//         error:function(result){
-//             console.log(result);
-//         }
-//     });
-// }
+function validaCliente(){
+    event.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'Valida/validaCliente.php',
+        dataType:'json',
+        data:{
+            cliente: $('#cliente').val()
+        },
+        success:function(result){
+            if(result.retorno == 1){
+                $('#cliente').addClass('border-danger');
+            }else{
+                enviaVenda();
+            }
+        },
+        error:function(request, status, error){
+            console.log(request + status + error);
+            $('#cliente').addClass('border-danger');
+        }
+    });
+}
 
 function excluiVenda(id){
     $.ajax({

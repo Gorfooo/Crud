@@ -17,7 +17,7 @@
     <!--  -->
     <link rel="stylesheet" type="text/css" href="css/vendas.css">
     <!--  -->
-    <!-- <script src="js/vendas.js"></script> -->
+    <script src="js/jquery.mask.js"></script>
     <title>Vendas</title>
 </head>
 
@@ -47,6 +47,20 @@ $retorno = $_GET['retorno'];
             <a class="navbar-brand text-white" href="#" onclick='window.open("../index.php","_self")'>Sair</a>
         </div>
     </nav>
+    <div class='container'>
+        <div class='mt-4'>
+            <div class="alert alert-danger text-center grid2" role="alert" id='erroInserirVenda'
+                style='height:70px;display:none'>
+                Erro ao inserir venda! Mensagem original:
+            </div>
+        </div>
+        <div class='mt-4'>
+            <div class="alert alert-danger text-center grid2" role="alert" id='erroInserirItensVenda'
+                style='height:70px;display:none'>
+                Erro ao inserir itens da venda! Mensagem original:
+            </div>
+        </div>
+    </div>
     <Div class='container'>
         <div class='row mt-4'>
             <div class='col'>
@@ -112,8 +126,8 @@ $retorno = $_GET['retorno'];
                                 <form class='form-group' id='form' >
                                     <div class="form-row mt-3">
                                         <div class='form-group col'>
-                                            <label for="cliente">Cliente:</label>
-                                            <input type='text' name='cliente' id='cliente' class='form-control'>
+                                            <label for="cliente">CPF/CNPJ:</label>
+                                            <input type='text' name='cliente' id='cliente' class='form-control' style='font-size: 13.4px;'>
                                         </div>
                                         <div class='form-group col'>
                                             <label for="data">Data:</label>
@@ -146,7 +160,7 @@ $retorno = $_GET['retorno'];
                                     </div>
                                     <div class='form-row'>
                                         <div class='form-group col-md-2'>
-                                            <button class='btn btn-primary' onclick='enviaItem();'>Adicionar Item</button>
+                                            <button class='btn btn-primary' onclick='validaProduto();'>Adicionar Item</button>
                                         </div>
                                     </div>
                                 </form>
@@ -163,7 +177,7 @@ $retorno = $_GET['retorno'];
                                         </tbody>
                                     </table>
                                     <div class='fixed-bottom mb-5 mr-4' style='left:auto'>
-                                        <button class='btn btn-primary'onclick='enviaVenda();'>Salvar</button>
+                                        <button class='btn btn-primary'onclick='validaCliente();'>Salvar</button>
                                     </div>
                                     <!-- ajustar -->
                                 </div>
