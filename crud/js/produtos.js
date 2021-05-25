@@ -85,21 +85,29 @@ function excluiProduto(id){
     });
 }
 
+function fechaModal(){
+    $('.modal').modal('hide');
+}
+
 function editaProduto(id){
-    // $('.loadModal').load('loadModalProdutos.php?id='+id);
-    $.ajax({
-        type:'POST',
-        url:'loadModalProdutos.php',
-        data:{
-            id: id
-        },
-	    dataType:'text',
-        success:function(text){
-            $('.loadModal').load('loadModalProdutos.php');
-            $('.modal').modal();
-        }, 
-        error:function(request, status, error){
-            console.log(request.responseText,status.responseText,error.responseText);
-        }
-    });
+    // $('.loadModal').load('loadModalProdutos.php');
+    $('.modal').modal();
+    //setar os values usando jquery e usar evento de click no salvar para dar o update
+    $('.loadModal').load('loadModalProdutos.php?id='+id);
+    // $.ajax({
+    //     type:'POST',
+    //     url:'loadModalProdutos.php',
+    //     dataType:'text',
+    //     data:{
+    //         produto: id_produto
+    //     },
+    //     success:function(result){
+    //         // $('.loadModal').load('loadModalProdutos.php');
+    //         // $('.modal').modal();
+    //         // console.log(result);
+    //     }, 
+    //     error:function(request, status, error){
+    //         console.log(request.responseText,status.responseText,error.responseText);
+    //     }
+    // });
 }

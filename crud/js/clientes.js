@@ -194,21 +194,21 @@ function excluiCliente(id) {
     });
 }
 
-    function editaCliente(id) {
-        $('.modal').modal();
-        // $(".modal").load('loadModal.php?id=' + id);
-        $.ajax({
-            type: 'POST',
-            url: 'loadModal.php',
-            data: {
-                id: id
-            },
-            dataType: 'json',
-            success: function (json) {
-                $('.loadModal').load('loadModal.php');
-            },
-            error: function (request, status, error) {
-                console.log(request.responseText, status.responseText, error.responseText);
-            }
-        });
-    }
+function editaCliente(id) {
+    $('.modal').modal();
+    // $(".modal").load('loadModal.php?id=' + id);
+    $.ajax({
+        type: 'POST',
+        url: 'loadModal.php',
+        data: {
+            id: id
+        },
+        dataType: 'json',
+        success: function (json) {
+            $('.loadModal').load('loadModal.php');
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText, status.responseText, error.responseText);
+        }
+    });
+}

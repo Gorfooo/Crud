@@ -130,7 +130,7 @@ $retorno = $_GET['retorno'];
                                 <h2 class='text-center'>CADASTRO DO ITEM:</h2>
                             </div>
                             <div class='col-1'>
-                                <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
+                                <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close" onclick = "fechaModal();"></i>
                             </div>
                         </div>
                         
