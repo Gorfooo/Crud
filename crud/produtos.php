@@ -118,7 +118,6 @@ $retorno = $_GET['retorno'];
             </table>
         </div>
     </Div>
-    <div class='loadModal'>
     <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog">
@@ -157,12 +156,12 @@ $retorno = $_GET['retorno'];
                                     </div>
                                     <div class='form-group col'>
                                         <label for='unidadeMedida'>Unidade de medida:</label>
-                                        <select name='unidadeMedida' class='custom-select custom-select'>
-                                            <option value='unidade'>UN</option>
-                                            <option value='kilograma'>KG</option>
-                                            <option value='metro'>MT</option>
-                                            <option value='metro cubico'>M³</option>
-                                            <option value='tonelada'>TON</option>
+                                        <select name='unidadeMedida' id='unidadeMedida' class='custom-select custom-select'>
+                                            <option id='unidade' value='unidade'>UN</option>
+                                            <option id='kilograma' value='kilograma'>KG</option>
+                                            <option id='metro' value='metro'>MT</option>
+                                            <option id='metro_cubico' value='metro cubico'>M³</option>
+                                            <option id='tonelada' value='tonelada'>TON</option>
                                         </select>
                                     </div>
                                 </div>
@@ -175,7 +174,7 @@ $retorno = $_GET['retorno'];
                                         </div>
                                     </div>
                                     <div class='form-group col-md-2'>
-                                        <button class='btn btn-primary' onclick='enviaProduto();'>Salvar</button>
+                                        <button class='btn btn-primary' id='salvar' >Salvar</button>
                                     </div>
                                 </div>
                             </form>
@@ -184,7 +183,6 @@ $retorno = $_GET['retorno'];
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 

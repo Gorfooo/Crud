@@ -54,6 +54,12 @@ $(function(){
     $('#fecharModal').css('cursor','pointer');
 })
 
+$(function(){
+    $('#modalProdutos').bind('click',function(){
+        $('#salvar').attr("onclick","enviaProduto();");
+    })
+})
+
 function enviaProduto() {
     $('#form').submit();
 }
@@ -89,25 +95,77 @@ function fechaModal(){
     $('.modal').modal('hide');
 }
 
-function editaProduto(id){
-    // $('.loadModal').load('loadModalProdutos.php');
-    $('.modal').modal();
-    //setar os values usando jquery e usar evento de click no salvar para dar o update
-    $('.loadModal').load('loadModalProdutos.php?id='+id);
-    // $.ajax({
-    //     type:'POST',
-    //     url:'loadModalProdutos.php',
-    //     dataType:'text',
-    //     data:{
-    //         produto: id_produto
-    //     },
-    //     success:function(result){
-    //         // $('.loadModal').load('loadModalProdutos.php');
-    //         // $('.modal').modal();
-    //         // console.log(result);
-    //     }, 
-    //     error:function(request, status, error){
-    //         console.log(request.responseText,status.responseText,error.responseText);
-    //     }
-    // });
+function editaProduto(id_produto){
+    $('#salvar').attr("onclick","updateProduto(" + id_produto + ");");
+    $.ajax({
+        type:'POST',
+        url:'Valida/loadModalProduto.php',
+        data:{
+            id: id_produto
+        },
+	    dataType:'json',
+        success:function(result){
+            $('.modal').modal();
+            $('#preco').val(result.preco);
+            $('#custo').val(result.custo);
+            $('#descricao').val(result.descricao);
+            $('#quantidade').val(result.quantidade);
+            if(result.status == 'checked'){
+                $('#status').prop( "checked", true);
+            }else{
+                $('#status').prop( "checked", false);
+            }
+            if(result.select1 == 'selected'){
+                $('#unidade').attr('selected',true);
+            }else if(result.select2 == 'selected'){
+                $('#kilograma').attr('selected',true);
+            }else if(result.select3 == 'selected'){
+                $('#metro').attr('selected',true);
+            }else if(result.select4 == 'selected'){
+                $('#metro_cubico').attr('selected',true);
+            }else{
+                $('#tonelada').attr('selected',true);
+            }
+        }, 
+        error:function(result){
+            console.log('deu ruim');
+        }
+    });
+}
+
+function updateProduto(id_produto){
+    event.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'Valida/updateProduto.php',
+        data:{
+            id: id_produto,
+            preco: $('#preco').val(),
+            custo: $('#custo').val(),
+            descricao: $('#descricao').val(),
+            quantidade: $('#quantidade').val(),
+            unidade_medida: $('#unidadeMedida').val(),
+            status: $('#status').val()
+        },
+	    dataType:'text',
+        success:function(result){
+            fechaModal();
+            $('#produtos').load("Valida/loadProdutos.php");
+            limpaModal();
+            console.log(result);
+        }, 
+        error:function(result){
+            console.log(result);
+        }
+    });
+}
+
+function limpaModal(){
+    $('#preco').val('');
+    $('#custo').val('');
+    $('#descricao').val('');
+    $('#quantidade').val('');
+    $('#preco').val('');
+    $('#unidade').attr('selected',true);
+    $('#status').prop( "checked", true);
 }
