@@ -68,7 +68,7 @@ $retorno = $_GET['retorno'];
             </div>
             <div class='col grid'>
                 <button type="button" class="btn btn-primary" id='modalVendas' data-toggle="modal"
-                    data-target=".bd-example-modal-lg">Nova Venda</button>
+                    data-target=".bd-example-modal-lg" onclick='limpaModal();'>Nova Venda</button>
             </div>
         </div>
         <hr>
@@ -89,6 +89,9 @@ $retorno = $_GET['retorno'];
             $SQL = "select * from tb_venda";
             $RS = mysqli_query($conexao,$SQL);
             $i = 1;
+            function data($data){
+                return date("d/m/Y", strtotime($data));
+            }
             while ($row = mysqli_fetch_assoc($RS)){
             $SQLCliente = "select nome from tb_cliente where id_cliente = " . $row["id_cliente"];
             $RSCliente = mysqli_query($conexao,$SQLCliente);
@@ -99,7 +102,7 @@ $retorno = $_GET['retorno'];
                 echo "<tr>
                 <th>$i</th>
                 <td>" . $row["id_venda"] . "</td>
-                <td>" . $row["data"] . "</td>
+                <td>" . data($row["data"]) . "</td>
                 <td>" . $rowCliente['nome'] ."</td>
                 <td>" . $rowItem['total'] . "</td>
                 <td><i class='fas fa-pencil-alt'onclick='editaVenda(". $row["id_venda"] .");'style='cursor:pointer'></i>
@@ -151,11 +154,11 @@ $retorno = $_GET['retorno'];
                                     <div class="form-row">
                                         <div class='form-group col'>
                                             <label for="quantidade">Quantidade:</label>
-                                            <input type='number' name='quantidade' id='quantidade' class='form-control'>
+                                            <input type='number' name='quantidade' id='quantidade' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                         </div>
                                         <div class='form-group col'>
                                             <label for="preco">Preço:</label>
-                                            <input type='number' name='preco' id='preco' class='form-control'>
+                                            <input type='number' name='preco' id='preco' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                         </div>
                                     </div>
                                     <div class='form-row'>
@@ -177,7 +180,7 @@ $retorno = $_GET['retorno'];
                                         </tbody>
                                     </table>
                                     <div class='fixed-bottom mb-5 mr-4' style='left:auto'>
-                                        <button class='btn btn-primary'onclick='validaCliente();'>Salvar</button>
+                                        <button class='btn btn-primary' id='salvar' onclick='validaCliente();'>Salvar</button>
                                     </div>
                                     <!-- ajustar -->
                                 </div>

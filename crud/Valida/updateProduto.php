@@ -32,9 +32,8 @@ else
 {
     $status = 'I';
 }
-
-$SQL = "update tb_produto set preco = $preco, custo = $custo, descricao = $descricao, quantidade = $quantidade,
-id_unidade_medida = $unidadeMedida, status = $status where id_produto = $id";
+$SQL = "update tb_produto set preco = $preco, custo = $custo, descricao = '$descricao', quantidade = $quantidade,
+id_unidade_medida = $unidadeMedida, status = '$status' where id_produto = $id";
 if(!mysqli_query($conexao,$SQL))
 {
     $erro = mysqli_error($conexao);

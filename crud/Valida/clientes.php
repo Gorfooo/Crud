@@ -16,17 +16,6 @@ $logradouro = str_replace("'", "", $logradouro);
 $cidade = str_replace("'", "", $cidade);
 $uf = str_replace("'", "", $uf);
 
-$SQLCPF = "select id_cliente from tb_cliente where cpf = '" . $cpf . "'";
-$SQLCNPJ = "select id_cliente from tb_cliente where cnpj = '" . $cnpj . "'";
-$RSCPF = mysqli_query($conexao,$SQLCPF);
-$RSCNPJ = mysqli_query($conexao,$SQLCNPJ);
-
-if((mysqli_num_rows($RSCPF) >= 1) || (mysqli_num_rows($RSCNPJ) >= 1)){
-    $retorno = 7;
-    header("Location: ../clientes.php?retorno=".$retorno);
-    return false;
-}
-
 if ($status == "on"){
     $status = 'A';
 }

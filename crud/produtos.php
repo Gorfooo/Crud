@@ -75,7 +75,7 @@ $retorno = $_GET['retorno'];
             </div>
             <div class='col grid'>
                 <button type="button" class="btn btn-primary" id='modalProdutos' data-toggle="modal"
-                    data-target=".bd-example-modal-lg">Novo Produto</button>
+                    data-target=".bd-example-modal-lg" onclick='limpaModal();'>Novo Produto</button>
             </div>
         </div>
         <hr>
@@ -137,11 +137,11 @@ $retorno = $_GET['retorno'];
                                 <div class='form-row mt-3'>
                                     <div class='form-group col'>
                                         <label for='preco'>Preço:</label>
-                                        <input type='number' name='preco' id='preco' class='form-control'>
+                                        <input type='number' name='preco' id='preco' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                     </div>
                                     <div class='form-group col'>
                                         <label for='custo'>Custo:</label>
-                                        <input type='number' name='custo' id='custo' class='form-control'>
+                                        <input type='number' name='custo' id='custo' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                     </div>
                                 </div>
                                 <div class='form-group'>
@@ -152,7 +152,7 @@ $retorno = $_GET['retorno'];
                                 <div class='form-row'>
                                     <div class='form-group col'>
                                         <label for='quantidade'>Quantidade:</label>
-                                        <input type='number' name='quantidade' id='quantidade' class='form-control'>
+                                        <input type='number' name='quantidade' id='quantidade' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                     </div>
                                     <div class='form-group col'>
                                         <label for='unidadeMedida'>Unidade de medida:</label>

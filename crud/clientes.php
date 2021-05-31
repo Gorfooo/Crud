@@ -86,12 +86,6 @@ $retorno = $_GET['retorno'];
                 Não é possível excluir esse cliente! Mensagem original: 
             </div>
         </div>
-        <div class='mt-4'>
-            <div class="alert alert-danger text-center grid2" role="alert" id='ClienteCadastrado'
-                style='height:70px;display:none'>
-                Cliente já cadastrado! 
-            </div>
-        </div>
     </div>
     <Div class='container'>
         <div class='row'>
@@ -100,7 +94,7 @@ $retorno = $_GET['retorno'];
             </div>
             <div class='col grid'>
                 <button type="button" class="btn btn-primary" id='modalClientes' data-toggle="modal"
-                    data-target=".bd-example-modal-lg">Novo Cliente</button>
+                    data-target=".bd-example-modal-lg"onclick='limpaModal();'>Novo Cliente</button>
             </div>
         </div>
         <hr>
@@ -172,7 +166,7 @@ $retorno = $_GET['retorno'];
                                 </div>
                                 <div class='form-group col'>
                                     <label for="limiteCredito">Limite de Crédito:</label>
-                                    <input type='number' name='limiteCredito' id='limiteCredito' class='form-control'>
+                                    <input type='number' name='limiteCredito' id='limiteCredito' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                 </div>
                             </div>
                             <div class='form-group'>
@@ -186,7 +180,7 @@ $retorno = $_GET['retorno'];
                                 </div>
                                 <div class='form-group col'>
                                     <label for="numero">Número:</label>
-                                    <input type='number' name='numero' id='numero' class='form-control'>
+                                    <input type='number' name='numero' id='numero' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
                                 </div>
                             </div>
                             <div class='form-group'>
@@ -212,7 +206,7 @@ $retorno = $_GET['retorno'];
                                     </div>
                                 </div>
                                 <div class='form-group col-md-2'>
-                                    <button class='btn btn-primary' onclick="enviaCliente();">Salvar</button>
+                                    <button class='btn btn-primary' id='salvar'>Salvar</button>
                                 </div>
                             </div>
                         </form>

@@ -8,36 +8,39 @@ $(function(){
     {
         $('#campoVazio').fadeIn();
     }
-})
-$(function(){  
     $('#excluiProduto').bind('click',function(){
         $('#excluiProduto').fadeOut();
     });
-})
-$(function(){  
     $('#excluiProduto').bind('mouseover',function(){
         $('#excluiProduto').css('cursor','pointer');
     });
-})
-$(function(){  
     $('#campoVazio').bind('click',function(){
         $('#campoVazio').fadeOut();
     });
-})
-$(function(){  
     $('#campoVazio').bind('mouseover',function(){
         $('#campoVazio').css('cursor','pointer');
     });
-})
-$(function(){  
     $('#valorAlto').bind('click',function(){
         $('#valorAlto').fadeOut();
     });
-})
-$(function(){  
     $('#valorAlto').bind('mouseover',function(){
         $('#valorAlto').css('cursor','pointer');
     });
+    $('#fecharModal').css('cursor','pointer');
+    $('#modalProdutos').bind('click',function(){
+        $('#salvar').attr("onclick","enviaProduto();");
+    });
+    $('#preco, #quantidade, #custo').bind('keydown', function (event) {//bloqueia caracter especial e deixa . e ,
+        switch (event.keyCode) {
+            default: var regex = new RegExp("^[a-zA-Z0-9.,/ $@()]+$");
+            var key = event.key;
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            } 
+            break; 
+        } 
+    }); 
 })
 
 setTimeout(function() {
@@ -50,18 +53,14 @@ setTimeout(function() {
     $('#excluiProduto').fadeOut();
 }, 4000);
 
-$(function(){
-    $('#fecharModal').css('cursor','pointer');
-})
-
-$(function(){
-    $('#modalProdutos').bind('click',function(){
-        $('#salvar').attr("onclick","enviaProduto();");
-    })
-})
-
 function enviaProduto() {
     $('#form').submit();
+}
+
+function maxLengthCheck(object)//limita qtd de caracteres
+{
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
 }
 
 function excluiProduto(id){
@@ -134,6 +133,11 @@ function editaProduto(id_produto){
 }
 
 function updateProduto(id_produto){
+    if($('#status').is(':checked')){
+        var status = 'on';
+    }else{
+        var status = '';
+    }
     event.preventDefault();
     $.ajax({
         type:'POST',
@@ -145,14 +149,12 @@ function updateProduto(id_produto){
             descricao: $('#descricao').val(),
             quantidade: $('#quantidade').val(),
             unidade_medida: $('#unidadeMedida').val(),
-            status: $('#status').val()
+            status: status
         },
 	    dataType:'text',
         success:function(result){
             fechaModal();
             $('#produtos').load("Valida/loadProdutos.php");
-            limpaModal();
-            console.log(result);
         }, 
         error:function(result){
             console.log(result);

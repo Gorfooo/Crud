@@ -3,6 +3,9 @@
     $SQL = "select * from tb_venda";
     $RS = mysqli_query($conexao,$SQL);
     $i = 1;
+    function data($data){
+        return date("d/m/Y", strtotime($data));
+    }
     while ($row = mysqli_fetch_assoc($RS)){
     $SQLCliente = "select nome from tb_cliente where id_cliente = " . $row["id_cliente"];
     $RSCliente = mysqli_query($conexao,$SQLCliente);
@@ -13,7 +16,7 @@
         echo "<tr>
         <th>$i</th>
         <td>" . $row["id_venda"] . "</td>
-        <td>" . $row["data"] . "</td>
+        <td>" . data($row["data"]) . "</td>
         <td>" . $rowCliente['nome'] ."</td>
         <td>" . $rowItem['total'] . "</td>
         <td><i class='fas fa-pencil-alt'onclick='editaVenda(". $row["id_venda"] .");'style='cursor:pointer'></i>
