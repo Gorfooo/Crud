@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+<?php
+session_start();
+if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == true))
+{
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    header('location:../index.php');
+}
+?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +48,7 @@ $retorno = $_GET['retorno'];
         <div class="collapse navbar-collapse" id='navbarSupportedContent'>
             <ul class='navbar-nav mr-auto'>
                 <li class='nav-item'><a class="navbar-brand text-white pr-2" href="#"
-                        onclick="window.open('principal.html','_self');">Dashboard</a></li>
+                        onclick="window.open('principal.php','_self');">Dashboard</a></li>
                 <li class='nav-item'><a class="navbar-brand text-white pr-2" href="#"
                         onclick="window.open('produtos.php','_self');">Produtos</a></li>
                 <li class='nav-item'><a class="navbar-brand text-white pr-2" href="#">Clientes</a></li>
@@ -98,6 +107,7 @@ $retorno = $_GET['retorno'];
             </div>
         </div>
         <hr>
+        <div class='table-responsive'>
         <table class="table table-hover">
             <thead class="thead-light table-striped">
                 <tr>
@@ -112,7 +122,7 @@ $retorno = $_GET['retorno'];
             <tbody id='clientes'>
             <?php
             include ('../conexao.php');
-            $SQL = "select id_cliente,nome,cpf,cnpj,uf from tb_cliente";
+            $SQL = "select cli.id_cliente,cli.nome,cli.cpf,cli.cnpj,uf.descricao from tb_cliente cli inner join tb_uf uf on cli.id_uf = uf.id_uf";
             $RS = mysqli_query($conexao,$SQL);
             $i = 1;
             while ($row = mysqli_fetch_assoc($RS)){
@@ -126,7 +136,7 @@ $retorno = $_GET['retorno'];
                 <td>" . $row["id_cliente"] . "</td>
                 <td>" . $row["nome"] . "</td>
                 <td>" . $row["$pessoa"] ."</td>
-                <td>" . $row["uf"] . "</td>
+                <td>" . $row["descricao"] . "</td>
                 <td><i class='fas fa-pencil-alt'onclick='editaCliente(". $row["id_cliente"] .");'style='cursor:pointer'></i>
                 <i class='fas fa-times ml-3'onclick='excluiCliente(". $row["id_cliente"] .");'style='cursor:pointer'></i></td>
                 </tr>";
@@ -135,6 +145,7 @@ $retorno = $_GET['retorno'];
              ?>
             </tbody>
         </table>
+        </div>
     </Div>
     <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" id='modal'>

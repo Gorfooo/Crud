@@ -1,0 +1,18 @@
+body{
+    overflow-x: hidden;
+}
+.chart-container-line{
+    margin-top: 250px;
+}
+@media only screen and (max-width: 1225px){
+    .chart-container-donut{
+        margin-bottom: 220px;
+    }
+    /* centralizar na col */
+}
+@media only screen and (max-width: 733px){
+    .navbar{
+        width:46rem;
+    }
+}
+/* 550px aumentar tamanho dos gráficos */

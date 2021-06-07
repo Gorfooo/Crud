@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+<?php
+session_start();
+if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == true))
+{
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    header('location:../index.php');
+}
+?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +46,7 @@ $retorno = $_GET['retorno'];
         <div class="collapse navbar-collapse" id='navbarSupportedContent'>
             <ul class='navbar-nav mr-auto'>
                 <li class='nav-item'><a class="navbar-brand text-white pr-2" href="#"
-                        onclick="window.open('principal.html','_self');">Dashboard</a></li>
+                        onclick="window.open('principal.php','_self');">Dashboard</a></li>
                 <li class='nav-item'><a class="navbar-brand text-white pr-2" href="#"
                         onclick="window.open('produtos.php','_self');">Produtos</a></li>
                 <li class='nav-item'><a class="navbar-brand text-white pr-2" href="#"
@@ -72,6 +81,7 @@ $retorno = $_GET['retorno'];
             </div>
         </div>
         <hr>
+        <div class='table-responsive'>
         <table class="table table-hover">
             <thead class="thead-light table-striped">
                 <tr>
@@ -113,6 +123,7 @@ $retorno = $_GET['retorno'];
              ?>
             </tbody>
         </table>
+        </div>
     </Div>
     <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel">

@@ -18,8 +18,7 @@ $(function(){//desaparece mensagem de erro e adiciona efeito do cursor
     $('#usuarioIncorreto').bind('mouseover',function(){
         $('#usuarioIncorreto').css('cursor','pointer');
     })
-})
-$(function(){//desaparece mensagem de erro e adiciona efeito do cursor
+//desaparece mensagem de erro e adiciona efeito do cursor
     $('#senhaIncorreta').bind('click',function(){
         $(this).fadeOut();
     })

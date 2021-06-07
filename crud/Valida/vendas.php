@@ -1,4 +1,11 @@
 <?php
+session_start();
+if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == true))
+{
+    unset($_SESSION['usuario']);
+    unset($_SESSION['senha']);
+    header('location:../index.php');
+}
 include ('../../conexao.php');
 $cliente = $_POST['cliente'];
 $data = $_POST['data'];

@@ -339,32 +339,9 @@ function fechaModal(){
     $('.modal').modal('hide');
 }
 
-function excluiItemUpdate(cont){
-    $('#produtos tr').remove();
-    $('#produtos>tbody').append("<tr><th scope='row'></th>#<td><b>Descrição</b></td><td><b>Quantidade</b></td><td><b>Preço</b></td></tr>");
-    y=0
-    for (x=0;x<cont;x++){
-        y = y+3;
-    }
-    itens.splice(y-3,3);
-
-    var ioriginal = i;
-    i=1;
-    pos1 = 0;
-    pos2 = 1;
-    pos3 = 2;
-    while (i!=(ioriginal-1)){
-        $('#produtos>tbody').append("<tr><th scope='row'>"+i+"</th><td>"+Object.values(itens[pos1])+"</td><td>"+Object.values(itens[pos2])+"</td><td>"+Object.values(itens[pos3])+"</td><td><i class='fas fa-times ml-3'onclick='excluiItemUpdate("+ i +");'style='cursor:pointer'></i></td></tr>")
-        i++;
-        pos1 = pos1 + 3;
-        pos2 = pos2 + 3;
-        pos3 = pos3 + 3;
-    }
-}
-
 function editaVenda(id_venda){
     event.preventDefault();
-    erro == 3;
+    erro = 3;
     limpaModal();
     $('#salvar').attr("onclick","updateVenda(" + id_venda + ");");
     $.ajax({
@@ -376,14 +353,14 @@ function editaVenda(id_venda){
 	    dataType:'json',
         success:function(result){
             i=1;
-            var pos1 = 0;
-            var pos2 = 1;
-            var pos3 = 2;
+            pos1 = 0;
+            pos2 = 1;
+            pos3 = 2;
             for(x = 0;x < result.tamanho;x++){
-                itens.push(result.descricao[x]);
-                itens.push(result.preco[x]);
-                itens.push(result.quantidade[x]);
-                $('#produtos').append("<tr><th scope='row'>"+i+"</th><td>"+Object.values(itens[pos1])+"</td><td>"+Object.values(itens[pos2])+"</td><td>"+Object.values(itens[pos3])+"</td><td><i class='fas fa-times ml-3'onclick='excluiItemUpdate("+ i +");'style='cursor:pointer'></i></td></tr>")
+                itens.push(result.descricao[x].descricao);
+                itens.push(result.preco[x].valor_unit);
+                itens.push(result.quantidade[x].quantidade);
+                $('#produtos').append("<tr><th scope='row'>"+i+"</th><td>"+itens[pos1]+"</td><td>"+itens[pos2]+"</td><td>"+itens[pos3]+"</td><td><i class='fas fa-times ml-3'onclick='excluiItem("+ i +");'style='cursor:pointer'></i></td></tr>")
                 i++;
                 pos1 = pos1 + 3;
                 pos2 = pos2 + 3;
@@ -427,9 +404,8 @@ function updateVenda(id_venda){
                     },
                     dataType:'text',
                     success:function(result){
-                        console.log(result);
-                        // fechaModal();
-                        // $('#venda').load("Valida/loadVendas.php");
+                        fechaModal();
+                        $('#venda').load("Valida/loadVendas.php");
                     }, 
                     error:function(result){
                         console.log(result.responseText);
@@ -456,5 +432,8 @@ function limpaModal(){
         itens = [];
         $('#produtos tr').remove();
         $('#produtos>tbody').append("<tr><th scope='row'></th>#<td><b>Descrição</b></td><td><b>Quantidade</b></td><td><b>Preço</b></td></tr>");
+        pos1 = 0;
+        pos2 = 1;
+        pos3 = 2;
     }
 }

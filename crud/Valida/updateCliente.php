@@ -20,8 +20,13 @@ else
     $status = 'I';
 }
 
+$SQLUF = "select id_uf from tb_uf where descricao='" . $uf ."'";
+$RSUF = mysqli_query($conexao,$SQLUF);
+$RowUF = mysqli_fetch_assoc($RSUF);
+$uf = $RowUF['id_uf'];
+
 $SQL = "update tb_cliente set cpf = '$cpf', cnpj = '$cnpj', limite_credito = $limiteCredito, nome = '$nome', cep = '$cep', numero = $numero, 
-logradouro = '$logradouro', cidade = '$cidade', UF= '$uf', status = '$status' where id_cliente = $id";
+logradouro = '$logradouro', cidade = '$cidade', id_uf= '$uf', status = '$status' where id_cliente = $id";
 if(!mysqli_query($conexao,$SQL))
 {
     $erro = mysqli_error($conexao);

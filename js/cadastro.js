@@ -23,33 +23,28 @@ $(function(){//esconde mensagens de erro
     $('#emailincorreto').hide();
     $('#datamaior').hide();
     $('#dataantiga').hide();
-})
-
-$(function(){//desaparece mensagem de erro e adiciona efeito do cursor
+//desaparece mensagem de erro e adiciona efeito do cursor
     $('#senhaincorreta').bind('click',function(){
         $(this).fadeOut();
     })
     $('#senhaincorreta').bind('mouseover',function(){
         $('#senhaincorreta').css('cursor','pointer');
     })
-})
-$(function(){//desaparece mensagem de erro e adiciona efeito do cursor
+//desaparece mensagem de erro e adiciona efeito do cursor
     $('#emailincorreto').bind('click',function(){
         $(this).fadeOut();
     })
     $('#emailincorreto').bind('mouseover',function(){
         $('#emailincorreto').css('cursor','pointer');
     })
-})
-$(function(){//desaparece mensagem de erro e adiciona efeito do cursor
+//desaparece mensagem de erro e adiciona efeito do cursor
     $('#datamaior').bind('click',function(){
         $(this).fadeOut();
     })
     $('#datamaior').bind('mouseover',function(){
         $('#datamaior').css('cursor','pointer');
     })
-})
-$(function(){//desaparece mensagem de erro e adiciona efeito do cursor
+//desaparece mensagem de erro e adiciona efeito do cursor
     $('#dataantiga').bind('click',function(){
         $(this).fadeOut();
     })
