@@ -23,6 +23,33 @@ $(function(){
         $(this).removeClass('border-danger');
     });
     $('#fecharModal').css('cursor','pointer');
+    $('#produto').on('focus click',function(){
+        $('.list-group').show();
+    })
+    $('#produto').on('blur',function(){
+        $('.list-group').hide();
+    })
+    $('#produto').on('keyup mouseup',function(){
+        event.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'Valida/consultaProduto.php',
+            dataType:'json',
+            data:{
+                produto: $('#produto').val()
+            },
+            success:function(result){
+                $('#1').html(result.retorno[0]);
+                $('#2').html(result.retorno[1]);
+                $('#3').html(result.retorno[2]);
+                $('#4').html(result.retorno[3]);
+                $('#5').html(result.retorno[4]);
+            },
+            error:function(request, status, error){
+                console.log(request + status + error);
+            }
+        });
+    })
 })
 
 $(function(){//bloqueia caracter especial e deixa . e ,

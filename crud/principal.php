@@ -30,8 +30,6 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
     <link rel="icon" type="image/png" sizes="16x16" href="../faviconprincipal/favicon-16x16.png">
     <link rel="manifest" href="../faviconprincipal/site.webmanifest"> -->
     <!--  -->
-    <script src="js/principal.js"></script>
-    <!--  -->
     <link rel="stylesheet" type="text/css" href="css/principal.css">
     <!--  -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -146,7 +144,7 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
             </script>
         </div>
         <div class='col'>
-            <div class="chart-container-donut ml-5 h-50" style="position: relative; height:250px; width:500px">
+            <div class="chart-container-donut ml-5" style="position: relative; height:250px; width:500px">
                 <canvas id="Donut"></canvas>
             </div>
             <script>

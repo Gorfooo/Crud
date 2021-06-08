@@ -67,7 +67,12 @@ if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) {//valida cep
     return false;
 }
 
-$SQL = "insert into tb_cliente (nome,cep,numero,logradouro,cidade,uf,limite_credito,cpf,cnpj,status) values ('" . $nome . "','" . $cep . "'," . $numero . ",'" . $logradouro . "','"
+$SQLUF = "select id_uf from tb_uf where descricao='" . $uf ."'";
+$RSUF = mysqli_query($conexao,$SQLUF);
+$RowUF = mysqli_fetch_assoc($RSUF);
+$uf = $RowUF['id_uf'];
+
+$SQL = "insert into tb_cliente (nome,cep,numero,logradouro,cidade,id_uf,limite_credito,cpf,cnpj,status) values ('" . $nome . "','" . $cep . "'," . $numero . ",'" . $logradouro . "','"
 . $cidade . "','" . $uf . "'," . $limiteCredito . ",'" . $cpf . "','" . $cnpj . "','" . $status . "')";
 
  if(!(mysqli_query($conexao,$SQL)))

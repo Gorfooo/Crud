@@ -205,7 +205,35 @@ $retorno = $_GET['retorno'];
                                 </div>
                                 <div class='form-group col'>
                                     <label for="uf">UF:</label>
-                                    <input type='text' name='uf' id='uf' class='form-control' maxlength="50">
+                                    <select name='uf' id='uf' class='custom-select custom-select'>
+                                        <option values='ac' id='ac'>AC</option>
+                                        <option values='al' id='al'>AL</option>
+                                        <option values='ap' id='ap'>AP</option>
+                                        <option values='am' id='am'>AM</option>
+                                        <option values='ba' id='ba'>BA</option>
+                                        <option values='ce' id='ce'>CE</option>
+                                        <option values='df' id='df'>DF</option>
+                                        <option values='es' id='es'>ES</option>
+                                        <option values='go' id='go'>GO</option>
+                                        <option values='ma' id='ma'>MA</option>
+                                        <option values='mt' id='mt'>MT</option>
+                                        <option values='ms' id='ms'>MS</option>
+                                        <option values='mg' id='mg'>MG</option>
+                                        <option values='pa' id='pa'>PA</option>
+                                        <option values='pb' id='pb'>PB</option>
+                                        <option values='pr' id='pr'>PR</option>
+                                        <option values='pe' id='pe'>PE</option>
+                                        <option values='pi' id='pi'>PI</option>
+                                        <option values='rj' id='rj'>RJ</option>
+                                        <option values='rn' id='rn'>RN</option>
+                                        <option values='rs' id='rs'>RS</option>
+                                        <option values='ro' id='ro'>RO</option>
+                                        <option values='rr' id='rr'>RR</option>
+                                        <option values='sc' id='sc'>SC</option>
+                                        <option values='sp' id='sp'>SP</option>
+                                        <option values='se' id='se'>SE</option>
+                                        <option values='to' id='to'>TO</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class='form-row'>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<?php
+    <?php
 session_start();
 if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == true))
 {
@@ -82,19 +82,19 @@ $retorno = $_GET['retorno'];
         </div>
         <hr>
         <div class='table-responsive'>
-        <table class="table table-hover">
-            <thead class="thead-light table-striped">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Código</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Total</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody id='venda'>
-            <?php
+            <table class="table table-hover">
+                <thead class="thead-light table-striped">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id='venda'>
+                    <?php
             include ('../conexao.php');
             $SQL = "select * from tb_venda";
             $RS = mysqli_query($conexao,$SQL);
@@ -121,8 +121,8 @@ $retorno = $_GET['retorno'];
                 $i++;
              };
              ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
     </Div>
     <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
@@ -137,11 +137,12 @@ $retorno = $_GET['retorno'];
                         <div class='row'>
                             <div class='col'>
                                 <h2 class='text-center'>CADASTRO DA VENDA:</h2>
-                                <form class='form-group' id='form' >
+                                <form class='form-group' id='form'>
                                     <div class="form-row mt-3">
                                         <div class='form-group col'>
                                             <label for="cliente">CPF/CNPJ:</label>
-                                            <input type='text' name='cliente' id='cliente' class='form-control' style='font-size: 13.4px;'>
+                                            <input type='text' name='cliente' id='cliente' class='form-control'
+                                                style='font-size: 13.4px;'>
                                         </div>
                                         <div class='form-group col'>
                                             <label for="data">Data:</label>
@@ -158,23 +159,33 @@ $retorno = $_GET['retorno'];
                                         <div class='form-row'>
                                             <div class='form-group col'>
                                                 <input type='text' name='produto' id='produto' class='form-control'
-                                                    maxlength="50">
+                                                    maxlength="50" autocomplete="off">
+                                                <ul class="list-group" style='display:none; position:absolute; z-index:999999999999999999999999999; width:98%'>
+                                                    <li class="list-group-item" id='1'></li>
+                                                    <li class="list-group-item" id='2'></li>
+                                                    <li class="list-group-item" id='3'></li>
+                                                    <li class="list-group-item" id='4'></li>
+                                                    <li class="list-group-item" id='5'></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class='form-group col'>
                                             <label for="quantidade">Quantidade:</label>
-                                            <input type='number' name='quantidade' id='quantidade' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
+                                            <input type='number' name='quantidade' id='quantidade' class='form-control'
+                                                maxlength='9' oninput="maxLengthCheck(this)">
                                         </div>
                                         <div class='form-group col'>
                                             <label for="preco">Preço:</label>
-                                            <input type='number' name='preco' id='preco' class='form-control' maxlength='9' oninput="maxLengthCheck(this)">
+                                            <input type='number' name='preco' id='preco' class='form-control'
+                                                maxlength='9' oninput="maxLengthCheck(this)">
                                         </div>
                                     </div>
                                     <div class='form-row'>
                                         <div class='form-group col-md-2'>
-                                            <button class='btn btn-primary' onclick='validaProduto();'>Adicionar Item</button>
+                                            <button class='btn btn-primary' onclick='validaProduto();'>Adicionar
+                                                Item</button>
                                         </div>
                                     </div>
                                 </form>
@@ -187,11 +198,12 @@ $retorno = $_GET['retorno'];
                                     <table class="table table-hover" id='produtos'>
                                         <thead class='table-borderless'>
                                         </thead>
-                                        <tbody >
+                                        <tbody>
                                         </tbody>
                                     </table>
                                     <div class='fixed-bottom mb-5 mr-4' style='left:auto'>
-                                        <button class='btn btn-primary' id='salvar' onclick='validaCliente();'>Salvar</button>
+                                        <button class='btn btn-primary' id='salvar'
+                                            onclick='validaCliente();'>Salvar</button>
                                     </div>
                                     <!-- ajustar -->
                                 </div>
@@ -203,4 +215,5 @@ $retorno = $_GET['retorno'];
         </div>
     </div>
 </body>
+
 </html>
