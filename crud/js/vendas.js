@@ -24,10 +24,42 @@ $(function(){
     });
     $('#fecharModal').css('cursor','pointer');
     $('#produto').on('focus click',function(){
-        $('.list-group').show();
+        $('#consultaProduto li').remove();
+        $('#consultaProduto').show();
     })
     $('#produto').on('blur',function(){
-        $('.list-group').hide();
+        setTimeout(function () {
+            $('#consultaProduto').hide();
+        }, 100);
+    })
+    $('#cliente').on('focus click',function(){
+        $('#consultaCliente li').remove();
+        $('#consultaCliente').show();
+    })
+    $('#cliente').on('blur',function(){
+        setTimeout(function () {
+            $('#consultaCliente').hide();
+        }, 100);
+    })
+    $('#cliente').on('keyup mouseup',function(){
+        event.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'Valida/consultaCliente.php',
+            dataType:'json',
+            data:{
+                cliente: $('#cliente').val()
+            },
+            success:function(result){
+                $('#consultaCliente li').remove();
+                for (i=0;i<5;i++){
+                    result.retorno[i] ? $('#consultaCliente').append("<li class='list-group-item' onclick='preencheCliente(this);'>"+result.retorno[i]+"</li>") : '';
+                }
+            },
+            error:function(request, status, error){
+                console.log(request + status + error);
+            }
+        });
     })
     $('#produto').on('keyup mouseup',function(){
         event.preventDefault();
@@ -39,11 +71,10 @@ $(function(){
                 produto: $('#produto').val()
             },
             success:function(result){
-                $('#1').html(result.retorno[0]);
-                $('#2').html(result.retorno[1]);
-                $('#3').html(result.retorno[2]);
-                $('#4').html(result.retorno[3]);
-                $('#5').html(result.retorno[4]);
+                $('#consultaProduto li').remove();
+                for (i=0;i<5;i++){
+                    result.retorno[i] ? $('#consultaProduto').append("<li class='list-group-item' onclick='preencheValor(this);'>"+result.retorno[i]+"</li>") : '';
+                }
             },
             error:function(request, status, error){
                 console.log(request + status + error);
@@ -51,6 +82,14 @@ $(function(){
         });
     })
 })
+
+function preencheCliente(dado){
+    $('#cliente').val($(dado).html());
+}
+
+function preencheValor(dado){
+    $('#produto').val($(dado).html());
+}
 
 $(function(){//bloqueia caracter especial e deixa . e ,
     $('#preco, #quantidade').bind('keydown', function (event) {

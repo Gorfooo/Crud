@@ -129,7 +129,7 @@ $retorno = $_GET['retorno'];
         aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <Div class='container'>
+                <Div class='container' style='height:auto;'>
                     <div class="modal-body">
                         <div class='text-right'>
                             <i class="fas fa-times" id='fecharModal' data-dismiss="modal" aria-label="Close"></i>
@@ -141,8 +141,10 @@ $retorno = $_GET['retorno'];
                                     <div class="form-row mt-3">
                                         <div class='form-group col'>
                                             <label for="cliente">CPF/CNPJ:</label>
-                                            <input type='text' name='cliente' id='cliente' class='form-control'
+                                            <input type='text' autocomplete="off" name='cliente' id='cliente' class='form-control'
                                                 style='font-size: 13.4px;'>
+                                                <ul class="list-group" id='consultaCliente' style='display:none; position:absolute; z-index:999999999999999999999999999; width:96%; font-size: 13.4px;'>
+                                                </ul>
                                         </div>
                                         <div class='form-group col'>
                                             <label for="data">Data:</label>
@@ -160,12 +162,7 @@ $retorno = $_GET['retorno'];
                                             <div class='form-group col'>
                                                 <input type='text' name='produto' id='produto' class='form-control'
                                                     maxlength="50" autocomplete="off">
-                                                <ul class="list-group" style='display:none; position:absolute; z-index:999999999999999999999999999; width:98%'>
-                                                    <li class="list-group-item" id='1'></li>
-                                                    <li class="list-group-item" id='2'></li>
-                                                    <li class="list-group-item" id='3'></li>
-                                                    <li class="list-group-item" id='4'></li>
-                                                    <li class="list-group-item" id='5'></li>
+                                                <ul class="list-group" id='consultaProduto' style='display:none; position:absolute; z-index:999999999999999999999999999; width:98%'>
                                                 </ul>
                                             </div>
                                         </div>
@@ -183,9 +180,13 @@ $retorno = $_GET['retorno'];
                                         </div>
                                     </div>
                                     <div class='form-row'>
-                                        <div class='form-group col-md-2'>
+                                        <div class='form-group col'>
                                             <button class='btn btn-primary' onclick='validaProduto();'>Adicionar
                                                 Item</button>
+                                        </div>
+                                        <div class='form-group col text-right'>
+                                            <button class='btn btn-primary salvarCel' id='salvar' onclick='validaCliente();'>Salvar
+                                                </button>
                                         </div>
                                     </div>
                                 </form>
@@ -202,10 +203,9 @@ $retorno = $_GET['retorno'];
                                         </tbody>
                                     </table>
                                     <div class='fixed-bottom mb-5 mr-4' style='left:auto'>
-                                        <button class='btn btn-primary' id='salvar'
+                                        <button class='btn btn-primary SalvarMic' id='salvar'
                                             onclick='validaCliente();'>Salvar</button>
                                     </div>
-                                    <!-- ajustar -->
                                 </div>
                             </div>
                         </div>
