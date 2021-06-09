@@ -1,19 +1,31 @@
 <?php
 include ('../../conexao.php');
 $cliente = $_POST['cliente'];
-$SQLCPF = "select cpf from tb_cliente where cpf like '%" . $cliente . "%' order by id_cliente limit 5";
-$RSCPF = mysqli_query($conexao,$SQLCPF);
-$pessoa = [];
-while($RowCpf = mysqli_fetch_assoc($RSCPF)){
-    $RowClienteCpf = $RowCpf['cpf'];
-    array_push($pessoa,$RowClienteCpf);
-};
-$SQLCNPJ = "select cnpj from tb_cliente where cnpj like '%" . $cliente . "%' order by id_cliente limit 5";
-$RSCNPJ = mysqli_query($conexao,$SQLCNPJ);
-while($RowCnpj = mysqli_fetch_assoc($RSCNPJ)){
-    $RowClienteCnpj = $RowCnpj['cnpj'];
-    array_push($pessoa,$RowClienteCnpj);
-};
-$retorno['retorno'] = $pessoa;
-echo json_encode($retorno);
+$clienteCnpj = $cliente;
+$clienteCpf = $cliente;
+if(strlen($clienteCpf) >= 3){
+    $clienteCpf = substr_replace($clienteCpf, '.', 3, 0);
+}
+if(strlen($clienteCpf) >= 7){
+    $clienteCpf = substr_replace($clienteCpf, '.', 7, 0);
+}
+if(strlen($clienteCpf) >= 11){
+    $clienteCpf = substr_replace($clienteCpf, '-', 11, 0);
+}//n permitir gravar mais que isso
+
+var_dump($clienteCpf);
+// $SQL = "select cpf,cnpj from tb_cliente where cpf like '%" . $clienteCpf . "%' or cnpj like '%".$clienteCnpj."%' order by id_cliente limit 5";
+// $RS = mysqli_query($conexao,$SQL);
+// $pessoa = [];
+// while($RowCliente = mysqli_fetch_assoc($RS)){
+//     $RowClienteCpf = $RowCliente['cpf'];
+//     $RowClienteCnpj = $RowCliente['cnpj'];
+//     if($RowClienteCpf){
+//         array_push($pessoa,$RowClienteCpf);
+//     }else{
+//         array_push($pessoa,$RowClienteCnpj);
+//     }
+// };
+// $retorno['retorno'] = $pessoa;
+// echo json_encode($retorno);
 ?>

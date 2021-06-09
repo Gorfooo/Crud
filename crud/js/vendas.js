@@ -46,11 +46,12 @@ $(function(){
         $.ajax({
             type:'POST',
             url:'Valida/consultaCliente.php',
-            dataType:'json',
+            dataType:'text',
             data:{
-                cliente: $('#cliente').val()
+                cliente: $('#cliente').val().replaceAll(".",'').replaceAll("-",'').replaceAll("/",'')
             },
             success:function(result){
+                console.log(result);
                 $('#consultaCliente li').remove();
                 for (i=0;i<5;i++){
                     result.retorno[i] ? $('#consultaCliente').append("<li class='list-group-item' onclick='preencheCliente(this);'>"+result.retorno[i]+"</li>") : '';
