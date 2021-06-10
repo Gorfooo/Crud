@@ -284,7 +284,7 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
                         var clientes = [];
                         var valorCompra = [];
                         for (x = 0; x < 5; x++) {
-                            clientes.push(result.clientes[x]);
+                            result.clientes[x] ? clientes.push(result.clientes[x]) : '';
                             valorCompra.push(result.valorCompra[x]);
                         }
                         var ctx = document.getElementById('Pizza');

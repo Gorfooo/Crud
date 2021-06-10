@@ -56,26 +56,24 @@ $retorno = $_GET['retorno'];
             <a class="navbar-brand text-white" href="#" onclick='window.open("../index.php","_self")'>Sair</a>
         </div>
     </nav>
-    <div class='container'>
-        <div class='mt-4'>
-            <div class="alert alert-danger text-center grid2" role="alert" id='erroInserirVenda'
-                style='height:70px;display:none'>
-                Erro ao inserir venda! Mensagem original:
-            </div>
-        </div>
-        <div class='mt-4'>
-            <div class="alert alert-danger text-center grid2" role="alert" id='erroInserirItensVenda'
-                style='height:70px;display:none'>
-                Erro ao inserir itens da venda! Mensagem original:
-            </div>
-        </div>
-    </div>
     <Div class='container'>
         <div class='row mt-4'>
             <div class='col'>
                 <h1 class='text-primary'>Registrar Venda</h1>
             </div>
-            <div class='col grid'>
+            <div class='col'>
+                <label for="data-inicial">Data inicial:</label>
+                <input type='date' name='dataI' id='dataI' class='form-control'>
+            </div>
+            <div class='col'>
+                <label for="data-final">Data final:</label>
+                <input type='date' name='dataF' id='dataF' class='form-control'>
+            </div>
+            <div class='col'>
+                <input type='number' name='codigoVenda' id='codigoVenda' placeholder="Buscar" class='form-control' maxlength='7'
+                    oninput="maxLengthCheck(this)">
+            </div>
+            <div class='col text-right'>
                 <button type="button" class="btn btn-primary" id='modalVendas' data-toggle="modal"
                     data-target=".bd-example-modal-lg" onclick='limpaModal();'>Nova Venda</button>
             </div>
@@ -141,10 +139,11 @@ $retorno = $_GET['retorno'];
                                     <div class="form-row mt-3">
                                         <div class='form-group col'>
                                             <label for="cliente">CPF/CNPJ:</label>
-                                            <input type='text' autocomplete="off" name='cliente' id='cliente' class='form-control'
-                                                style='font-size: 13.4px;'>
-                                                <ul class="list-group" id='consultaCliente' style='display:none; position:absolute; z-index:999999999999999999999999999; width:96%; font-size: 13.4px;'>
-                                                </ul>
+                                            <input type='text' autocomplete="off" name='cliente' id='cliente'
+                                                class='form-control' style='font-size: 13.4px;'>
+                                            <ul class="list-group" id='consultaCliente'
+                                                style='display:none; position:absolute; z-index:999999999999999999999999999; width:96%; font-size: 13.4px;'>
+                                            </ul>
                                         </div>
                                         <div class='form-group col'>
                                             <label for="data">Data:</label>
@@ -162,7 +161,8 @@ $retorno = $_GET['retorno'];
                                             <div class='form-group col'>
                                                 <input type='text' name='produto' id='produto' class='form-control'
                                                     maxlength="50" autocomplete="off">
-                                                <ul class="list-group" id='consultaProduto' style='display:none; position:absolute; z-index:999999999999999999999999999; width:98%'>
+                                                <ul class="list-group" id='consultaProduto'
+                                                    style='display:none; position:absolute; z-index:999999999999999999999999999; width:98%'>
                                                 </ul>
                                             </div>
                                         </div>
@@ -185,8 +185,9 @@ $retorno = $_GET['retorno'];
                                                 Item</button>
                                         </div>
                                         <div class='form-group col text-right'>
-                                            <button class='btn btn-primary salvarCel' id='salvar' onclick='validaCliente();'>Salvar
-                                                </button>
+                                            <button class='btn btn-primary salvarCel' id='salvar'
+                                                onclick='validaCliente();'>Salvar
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -196,10 +197,10 @@ $retorno = $_GET['retorno'];
                                     <div class='col'>
                                         <h2 class='text-center'>ITENS DA VENDA:</h2>
                                     </div>
-                                    <table class="table table-hover" id='produtos'>
-                                        <thead class='table-borderless'>
+                                    <table class="table table-hover responsivo" id='produtos'>
+                                        <thead class='table-borderless' style='display: block;'>
                                         </thead>
-                                        <tbody>
+                                        <tbody style='display: block;overflow-y: auto;height: 330px;'>
                                         </tbody>
                                     </table>
                                     <div class='fixed-bottom mb-5 mr-4' style='left:auto'>

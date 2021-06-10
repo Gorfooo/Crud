@@ -30,7 +30,7 @@ $(function(){
     $('#produto').on('blur',function(){
         setTimeout(function () {
             $('#consultaProduto').hide();
-        }, 100);
+        }, 300);
     })
     $('#cliente').on('focus click',function(){
         $('#consultaCliente li').remove();
@@ -39,22 +39,21 @@ $(function(){
     $('#cliente').on('blur',function(){
         setTimeout(function () {
             $('#consultaCliente').hide();
-        }, 100);
+        }, 300);
     })
     $('#cliente').on('keyup mouseup',function(){
         event.preventDefault();
         $.ajax({
             type:'POST',
             url:'Valida/consultaCliente.php',
-            dataType:'text',
+            dataType:'json',
             data:{
                 cliente: $('#cliente').val().replaceAll(".",'').replaceAll("-",'').replaceAll("/",'')
             },
             success:function(result){
-                console.log(result);
                 $('#consultaCliente li').remove();
-                for (i=0;i<5;i++){
-                    result.retorno[i] ? $('#consultaCliente').append("<li class='list-group-item' onclick='preencheCliente(this);'>"+result.retorno[i]+"</li>") : '';
+                for (d=0;d<5;d++){
+                    result.retorno[d] ? $('#consultaCliente').append("<li class='list-group-item' onclick='preencheCliente(this);'>"+result.retorno[d]+"</li>") : '';
                 }
             },
             error:function(request, status, error){
@@ -73,8 +72,8 @@ $(function(){
             },
             success:function(result){
                 $('#consultaProduto li').remove();
-                for (i=0;i<5;i++){
-                    result.retorno[i] ? $('#consultaProduto').append("<li class='list-group-item' onclick='preencheValor(this);'>"+result.retorno[i]+"</li>") : '';
+                for (d=0;d<5;d++){
+                    result.retorno[d] ? $('#consultaProduto').append("<li class='list-group-item' onclick='preencheValor(this);'>"+result.retorno[d]+"</li>") : '';
                 }
             },
             error:function(request, status, error){
@@ -297,28 +296,6 @@ function excluiItem(cont){
     }
 }
 
-setTimeout(function () {
-    $('#erroInserirVenda').fadeOut();
-}, 3000);
-$(function () {
-    $('#erroInserirVenda').bind('click', function () {
-        $('#erroInserirVenda').fadeOut();
-    });
-    $('#erroInserirVenda').bind('mouseover', function () {
-        $('#erroInserirVenda').css('cursor', 'pointer');
-    });
-    $('#erroInserirItensVenda').bind('click', function () {
-        $('#erroInserirItensVenda').fadeOut();
-    });
-    $('#erroInserirItensVenda').bind('mouseover', function () {
-        $('#erroInserirItensVenda').css('cursor', 'pointer');
-    });
-})
-
-setTimeout(function () {
-    $('#erroInserirItensVenda').fadeOut();
-}, 3000);
-
 erro = '';
 function enviaVenda(){
     event.preventDefault();
@@ -332,26 +309,8 @@ function enviaVenda(){
             data: $('#data').val()
         },
         success:function(result){
-            erro = result.codigo;
-            if(result.codigo == 1){
-                $('.modal').modal('hide');
-                $('#erroInserirVenda').html('');
-                $('#erroInserirVenda').append('Erro ao inserir venda! Mensagem original: ' + result.retornado);
-                $('#erroInserirVenda').fadeIn();
-            }else if (result.codigo == 2){
-                $('.modal').modal('hide');
-                $('#erroInserirItensVenda').append('Erro ao inserir itens da venda! Mensagem original: ' + result.retornado);
-                $('#erroInserirItensVenda').fadeIn();
-            }else{
                 $('.modal').modal('hide');
                 $('#venda').load("Valida/loadVendas.php");
-            }
-            setTimeout(function () {
-                $('#erroInserirVenda').fadeOut();
-            }, 5000);
-            setTimeout(function () {
-                $('#erroInserirItensVenda').fadeOut();
-            }, 3000);
             limpaModal();
         },
         error:function(request, status, error){
@@ -488,9 +447,6 @@ function updateVenda(id_venda){
 }
 
 function limpaModal(){
-    if (erro == 1 || erro == 2){
-        //caso ocorrer erro na inserção irá manter os dados para tentar enviar novamente
-    }else{
         $('#cliente').val('');
         $('#data').val('');
         $('#produto').val('');
@@ -502,5 +458,4 @@ function limpaModal(){
         pos1 = 0;
         pos2 = 1;
         pos3 = 2;
-    }
 }
