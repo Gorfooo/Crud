@@ -40,7 +40,24 @@ $(function(){
             } 
             break; 
         } 
-    }); 
+    });
+    $("#codigoProduto").keydown(function() {
+        var x = event.keyCode;
+        if(x == 13){
+            $.ajax({
+                type:'POST',
+                url:'Valida/loadProdutos.php',
+                dataType:'text',
+                success:function(result){
+                    console.log('a');
+                    $('#produtos').load("Valida/loadProdutos.php?codigo="+$('#codigoProduto').val());
+                },
+                error:function(request, status, error){
+                    console.log(request + status + error);
+                }
+            });
+        }
+    })
 })
 
 setTimeout(function() {

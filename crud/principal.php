@@ -55,224 +55,10 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
             <a class="navbar-brand text-white" href="#" onclick='window.open("../index.php","_self")'>Sair</a>
         </div>
     </nav>
+    <div class='centro'>
     <div class='row'>
         <div class='col'>
-            <div class="chart-container-barra ml-5 max-300" style="position: relative; height:300px; width:600px">
-                <canvas id="Bar"></canvas>
-            </div>
-            <script>
-                $.ajax({
-                    type: 'POST',
-                    url: 'grafico/Barra.php',
-                    dataType: 'json',
-                    success: function (result) {
-                        var meses = [];
-                        var valores = [];
-                        var tamanho = result.tamanho;
-                        for (x = 0; x < tamanho; x++) {
-                            meses.push(result.meses[x]);
-                            valores.push(result.valores[x]);
-                        }
-                        var data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                        var y = 1;
-                        var z = 0;
-                        for (x = 0; x < 12; x++) {
-                            if (meses[z] == y) {
-                                data[x] = valores[z];
-                                z++;
-                            }
-                            y++;
-                        }
-                        var ctx = document.getElementById('Bar');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago",
-                                    "set", "out",
-                                    "nov",
-                                    "dez"
-                                ],
-                                datasets: [{
-                                    label: "Vendas por Mês em R$",
-                                    data: data,
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 159, 64, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 159, 64, 0.6)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    },
-                    error: function (result) {
-                        console.log(result);
-                    }
-                });
-            </script>
-        </div>
-        <div class='col'>
-            <div class="chart-container-donut ml-5" style="position: relative; height:250px; width:500px">
-                <canvas id="Donut"></canvas>
-            </div>
-            <script>
-                $.ajax({
-                    type: 'POST',
-                    url: 'grafico/Donut.php',
-                    dataType: 'json',
-                    success: function (result) {
-                        var quantidade = [];
-                        var tamanho = result.tamanho;
-                        for (x = 0; x < tamanho; x++) {
-                            quantidade.push(result.quantidade[x]);
-                        }
-                        var ctx = document.getElementById('Donut');
-                        var myChart = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
-                                    "MT", "MS", "MG",
-                                    "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR",
-                                    "SC", "SP", "SE",
-                                    "TO"
-                                ],
-                                datasets: [{
-                                    label: "Vendas por Mês",
-                                    data: [quantidade[0],quantidade[1],quantidade[2],quantidade[3],quantidade[4],quantidade[5],quantidade[6],quantidade[7],quantidade[8],quantidade[9],
-                                    quantidade[10],quantidade[11],quantidade[12],quantidade[13],quantidade[14],quantidade[15],quantidade[16],quantidade[17],quantidade[18],quantidade[19],
-                                    quantidade[20],quantidade[21],quantidade[22],quantidade[23],quantidade[24],quantidade[25],quantidade[26]],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)',
-                                        'rgba(153, 102, 255, 0.6)',
-                                        'rgba(255, 99, 132, 0.6)',
-                                        'rgba(54, 162, 235, 0.6)',
-                                        'rgba(255, 206, 86, 0.6)',
-                                        'rgba(75, 192, 192, 0.6)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                plugins: {
-                                    title: {
-                                        display: true,
-                                        text: 'Quantidade de clientes por estado'
-                                    }
-                                },
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    },
-                    error: function (result) {
-                        console.log(result);
-                    }
-                });
-            </script>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col'>
-            <div class="chart-container-pizza ml-5 mt-5" style="position: relative; height:250px; width:500px">
+        <div class="chart-container-pizza ml-5 h-50" style="position: relative; height:250px; width:500px">
                 <canvas id="Pizza"></canvas>
             </div>
             <script>
@@ -336,7 +122,214 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
             </script>
         </div>
         <div class='col'>
-            <div class="chart-container-line ml-5" style="position: relative; height:300px; width:600px">
+            <div class="chart-container-donut ml-5" style="position: relative; height:250px; width:500px">
+                <canvas id="Donut"></canvas>
+            </div>
+            <script>
+                $.ajax({
+                    type: 'POST',
+                    url: 'grafico/Donut.php',
+                    dataType: 'json',
+                    success: function (result) {
+                        var quantidade = [];
+                        var tamanho = result.tamanho;
+                        for (x = 0; x < tamanho; x++) {
+                            quantidade.push(result.quantidade[x]);
+                        }
+                        var ctx = document.getElementById('Donut');
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+                                    "MT", "MS", "MG",
+                                    "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR",
+                                    "SC", "SP", "SE",
+                                    "TO"
+                                ],
+                                datasets: [{
+                                    label: "Vendas por Mês",
+                                    data: [quantidade[0],quantidade[1],quantidade[2],quantidade[3],quantidade[4],quantidade[5],quantidade[6],quantidade[7],quantidade[8],quantidade[9],
+                                    quantidade[10],quantidade[11],quantidade[12],quantidade[13],quantidade[14],quantidade[15],quantidade[16],quantidade[17],quantidade[18],quantidade[19],
+                                    quantidade[20],quantidade[21],quantidade[22],quantidade[23],quantidade[24],quantidade[25],quantidade[26]],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.6)',
+                                        'rgba(54, 162, 235, 0.6)',
+                                        'rgba(255, 206, 86, 0.6)',
+                                        'rgba(75, 192, 192, 0.6)',
+                                        'rgba(153, 102, 255, 0.6)',
+                                        'rgba(219,112,147, 0.6)',
+                                        'rgba(75,0,130, 0.6)',
+                                        'rgba(188,143,143, 0.6)',
+                                        'rgba(60,179,113, 0.6)',
+                                        'rgba(0,206,209, 0.6)',
+                                        'rgba(65,105,225, 0.6)',
+                                        'rgba(25,25,112, 0.6)',
+                                        'rgba(0,255,255, 0.6)',
+                                        'rgba(255, 99, 132, 0.6)',
+                                        'rgba(54, 162, 235, 0.6)',
+                                        'rgba(255, 206, 86, 0.6)',
+                                        'rgba(75, 192, 192, 0.6)',
+                                        'rgba(153, 102, 255, 0.6)',
+                                        'rgba(219,112,147, 0.6)',
+                                        'rgba(75,0,130, 0.6)',
+                                        'rgba(188,143,143, 0.6)',
+                                        'rgba(60,179,113, 0.6)',
+                                        'rgba(0,206,209, 0.6)',
+                                        'rgba(65,105,225, 0.6)',
+                                        'rgba(25,25,112, 0.6)',
+                                        'rgba(0,255,255, 0.6)',
+                                        'rgba(75, 192, 192, 0.6)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(219,112,147, 1)',
+                                        'rgba(75,0,130, 1)',
+                                        'rgba(188,143,143, 1)',
+                                        'rgba(60,179,113, 1)',
+                                        'rgba(0,206,209, 1)',
+                                        'rgba(65,105,225, 1)',
+                                        'rgba(25,25,112, 1)',
+                                        'rgba(0,255,255, 1)',
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(219,112,147, 1)',
+                                        'rgba(75,0,130, 1)',
+                                        'rgba(188,143,143, 1)',
+                                        'rgba(60,179,113, 1)',
+                                        'rgba(0,206,209, 1)',
+                                        'rgba(65,105,225, 1)',
+                                        'rgba(25,25,112, 1)',
+                                        'rgba(0,255,255, 1)',
+                                        'rgba(75, 192, 192, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Quantidade de clientes por estado'
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    error: function (result) {
+                        console.log(result);
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col'>
+        <div class="chart-container-barra ml-5 mt-5 max-300" style="position: relative; height:250px; width:500px">
+                <canvas id="Bar"></canvas>
+            </div>
+            <script>
+                $.ajax({
+                    type: 'POST',
+                    url: 'grafico/Barra.php',
+                    dataType: 'json',
+                    success: function (result) {
+                        var meses = [];
+                        var valores = [];
+                        var tamanho = result.tamanho;
+                        for (x = 0; x < tamanho; x++) {
+                            meses.push(result.meses[x]);
+                            valores.push(result.valores[x]);
+                        }
+                        var data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        var y = 1;
+                        var z = 0;
+                        for (x = 0; x < 12; x++) {
+                            if (meses[z] == y) {
+                                data[x] = valores[z];
+                                z++;
+                            }
+                            y++;
+                        }
+                        var ctx = document.getElementById('Bar');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago",
+                                    "set", "out",
+                                    "nov",
+                                    "dez"
+                                ],
+                                datasets: [{
+                                    label: "Ocultar",
+                                    data: data,
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.6)',
+                                        'rgba(54, 162, 235, 0.6)',
+                                        'rgba(255, 206, 86, 0.6)',
+                                        'rgba(75, 192, 192, 0.6)',
+                                        'rgba(153, 102, 255, 0.6)',
+                                        'rgba(255, 159, 64, 0.6)',
+                                        'rgba(255, 99, 132, 0.6)',
+                                        'rgba(54, 162, 235, 0.6)',
+                                        'rgba(255, 206, 86, 0.6)',
+                                        'rgba(75, 192, 192, 0.6)',
+                                        'rgba(153, 102, 255, 0.6)',
+                                        'rgba(255, 159, 64, 0.6)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)',
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Vendas por Mês em R$'
+                                    }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    error: function (result) {
+                        console.log(result);
+                    }
+                });
+            </script>
+        </div>
+        <div class='col'>
+            <div class="chart-container-line ml-5 mt-5" style="position: relative; height:250px; width:500px">
                 <canvas id="Linha"></canvas>
             </div>
             <script>
@@ -372,7 +365,7 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
                                     "dez"
                                 ],
                                 datasets: [{
-                                    label: "Quantidade de Vendas por Mês",
+                                    label: "Ocultar",
                                     data: data,
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.6)',
@@ -406,6 +399,12 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
                                 }]
                             },
                             options: {
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Quantidade de Vendas por Mês'
+                                    }
+                                },
                                 responsive: true,
                                 maintainAspectRatio: true,
                                 scales: {
@@ -415,6 +414,7 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
                                 }
                             }
                         });
+                        chart.render();
                     },
                     error: function (result) {
                         console.log(result);
@@ -422,6 +422,7 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
                 });
             </script>
         </div>
+    </div>
     </div>
 </body>
 </html>

@@ -106,6 +106,13 @@ $retorno = $_GET['retorno'];
                     data-target=".bd-example-modal-lg"onclick='limpaModal();'>Novo Cliente</button>
             </div>
         </div>
+        <div class='row justify-content-end'>
+        <div class='col-6 col-sm-3 mt-2'>
+                <input type='number' name='codigoCliente' id='codigoCliente' placeholder="Buscar" class='form-control'
+                    maxlength='7' oninput="maxLengthCheck(this)">
+                <div id="lupa"></div>
+            </div>
+        </div>
         <hr>
         <div class='table-responsive'>
         <table class="table table-hover">
@@ -122,7 +129,7 @@ $retorno = $_GET['retorno'];
             <tbody id='clientes'>
             <?php
             include ('../conexao.php');
-            $SQL = "select cli.id_cliente,cli.nome,cli.cpf,cli.cnpj,uf.descricao from tb_cliente cli inner join tb_uf uf on cli.id_uf = uf.id_uf";
+            $SQL = "select cli.id_cliente,cli.nome,cli.cpf,cli.cnpj,uf.descricao,cli.status from tb_cliente cli inner join tb_uf uf on cli.id_uf = uf.id_uf";
             $RS = mysqli_query($conexao,$SQL);
             $i = 1;
             while ($row = mysqli_fetch_assoc($RS)){
@@ -131,7 +138,12 @@ $retorno = $_GET['retorno'];
                 }else{
                     $pessoa = 'cpf';
                 }
-                echo "<tr>
+                if($row['status'] == 'I'){
+                    $inativo = "style='opacity:0.5'";
+                }else{
+                    $inativo = "style='opacity:1'";
+                }
+                echo "<tr ".$inativo.">
                 <th>$i</th>
                 <td>" . $row["id_cliente"] . "</td>
                 <td>" . $row["nome"] . "</td>

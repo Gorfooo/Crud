@@ -34,3 +34,23 @@ input[type=number]::-webkit-inner-spin-button {
     width: 100%;
     overflow-x: auto;
 }
+#codigoVenda{
+    border:#ddd solid 1px;
+    float:left;
+    padding:5px 20px 5px 5px;
+ }
+ #lupa{
+    float:left;
+    margin:3px 0px 0px -20px;
+    margin-bottom: 0.5rem;
+ }
+ #lupa:after{
+    font-family:FontAwesome;
+    font-size:14px;
+    content:"\f002";
+ }
+ @media only screen and (max-width: 767px){
+    #codigoVenda{
+        margin-top: 0.5rem !important;
+    }
+ }

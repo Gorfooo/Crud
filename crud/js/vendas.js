@@ -81,6 +81,35 @@ $(function(){
             }
         });
     })
+    $("#codigoVenda").keydown(function() {
+        var x = event.keyCode;
+        if(x == 13){
+            $.ajax({
+                type:'POST',
+                url:'Valida/loadVendas.php',
+                dataType:'text',
+                success:function(result){
+                    $('#venda').load("Valida/loadVendas.php?codigo="+$('#codigoVenda').val());
+                },
+                error:function(request, status, error){
+                    console.log(request + status + error);
+                }
+            });
+        }
+    })
+    $('#filtraDatas').on('click',function(){
+        $.ajax({
+            type:'POST',
+            url:'Valida/loadVendas.php',
+            dataType:'text',
+            success:function(result){
+                $('#venda').load("Valida/loadVendas.php?dataI="+$('#dataI').val()+"&dataF="+$('#dataF').val());
+            },
+            error:function(request, status, error){
+                console.log(request + status + error);
+            }
+        });
+    })
 })
 
 function preencheCliente(dado){
@@ -112,21 +141,6 @@ function maxLengthCheck(object)//limita qtd de caracteres
 }
 
 $(function () {
-    // $('#cliente').mask('00.000.000/0000-00', {
-    //     reverse: true
-    // });
-    // $('#cliente').bind('keypress',function(){
-    //     var options = {
-    //         onKeyPress : function(cliente, e, field, options) {
-    //             var masks = ['000.000.000-009', '00.000.000/0000-00'];
-    //             var mask = (cliente.length > 14) ? masks[1] : masks[0];
-    //             $('#cliente').mask(mask, options);
-    //         }
-    //     };
-    //     $('#cliente').mask('000.000.000-009', options);
-    // })
-    
-
     var options = {//funciona mas no ctrl v do cnpj não fica correto
 		onKeyPress : function(cliente, e, field, options) {
 			var masks = ['000.000.000-009', '00.000.000/0000-00'];
@@ -136,68 +150,6 @@ $(function () {
 	};
 
     $('#cliente').mask('000.000.000-009', options);
-
-
-    // $('#cliente').mask('00.000.000/0000-00', {
-    //     reverse: true
-    // });
-    // $("#cliente").bind('mousedown keydown', function(){
-    //     $('#cliente').unmask();
-    //     if($("#cliente").val().length<11){
-    //         $('#cliente').mask("999.999.999-99");
-    //     }else{
-    //         $('#cliente').mask("99.999.999/9999-99");
-    //     }
-    // })
-    // $("#cliente").mousedown(function() {
-    //     if($('#cliente').val().length == 0){
-    //         $('#cliente').mask('00.000.000/0000-00', {
-    //             reverse: true
-    //         });
-    //     }else if($('#cliente').val().length == 14){ 
-    //         $('#cliente').mask('00.000.000/0000-00', {
-    //             reverse: true
-    //         });
-    //     }
-    // })
-    // $("#cliente").click(function() {
-    //     // var x = event.keyCode;
-    //         if($('#cliente').val().length <= 14){  
-    //             $('#cliente').mask('000.000.000-00', {
-    //                 reverse: true
-    //             });
-    //         }else{
-    //             $('#cliente').mask('00.000.000/0000-00', {
-    //                 reverse: true
-    //             });
-    //         }
-    //   });
-    // $("#cliente").keydown(function() {
-    //     var x = event.keyCode;
-    //     if(x == 86 || x == 96 || x == 97 || x == 98 || x == 99 || x == 100 || x == 101 || x == 102 || x == 103 || x == 104 || x == 105 || x == 48 || x == 49 || x == 50 || x == 51 || x == 52 || x == 53 || x == 54 || x == 55 || x == 56 || x == 57){
-    //         if($('#cliente').val().length == 0){
-    //             $('#cliente').mask('00.000.000/0000-00', {
-    //                 reverse: true
-    //             });
-    //         }else if($('#cliente').val().length == 14){ 
-    //             $('#cliente').mask('00.000.000/0000-00', {
-    //                 reverse: true
-    //             });
-    //         }
-    //     }
-    // })
-    // $("#cliente").keyup(function() {
-    //     var x = event.keyCode;
-    //         if($('#cliente').val().length <= 14){  
-    //             $('#cliente').mask('000.000.000-00', {
-    //                 reverse: true
-    //             });
-    //         }else{
-    //             $('#cliente').mask('00.000.000/0000-00', {
-    //                 reverse: true
-    //             });
-    //         }
-    //   });
 })
 
 function validaProduto(){

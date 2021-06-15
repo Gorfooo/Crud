@@ -8,10 +8,19 @@ if((!isset ($_SESSION['usuario']) == true) && (!isset ($_SESSION['senha']) == tr
 }
 include ('../../conexao.php');
 $SQL = "select id_produto,descricao,quantidade,preco,custo,status from tb_produto";
+$Codigo = $_GET['codigo'];
+if($Codigo){
+    $SQL = "select id_produto,descricao,quantidade,preco,custo,status from tb_produto where id_produto = ".$Codigo;
+}
 $RS = mysqli_query($conexao,$SQL);
 $i = 1;
 while ($row = mysqli_fetch_assoc($RS)){
-    echo "<tr>
+    if($row['status'] == 'I'){
+        $inativo = "style='opacity:0.5'";
+    }else{
+        $inativo = "style='opacity:1'";
+    }
+    echo "<tr ".$inativo.">
     <th class='centro'>$i</th>
     <td class='centro'>" . $row["id_produto"] . "</td>
     <td class='centro'>" . $row["descricao"] . "</td>

@@ -38,3 +38,18 @@ input[type=number]::-webkit-inner-spin-button {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
+#codigoProduto{
+    border:#ddd solid 1px;
+    float:left;
+    padding:5px 20px 5px 5px;
+}
+ #lupa{
+    float:left;
+    margin:3px 0px 0px -20px;
+    margin-top: 0.3rem;
+}
+ #lupa:after{
+    font-family:FontAwesome;
+    font-size:14px;
+    content:"\f002";
+}

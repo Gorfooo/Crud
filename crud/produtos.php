@@ -87,6 +87,13 @@ $retorno = $_GET['retorno'];
                     data-target=".bd-example-modal-lg" onclick='limpaModal();'>Novo Produto</button>
             </div>
         </div>
+        <div class='row justify-content-end'>
+        <div class='col-6 col-sm-3 mt-2'>
+                <input type='number' name='codigoProduto' id='codigoProduto' placeholder="Buscar" class='form-control'
+                    maxlength='7' oninput="maxLengthCheck(this)">
+                <div id="lupa"></div>
+            </div>
+        </div>
         <hr>
         <div class="table-responsive">
             <table class="table table-hover" valign="bottom">
@@ -109,7 +116,12 @@ $retorno = $_GET['retorno'];
                     $RS = mysqli_query($conexao,$SQL);
                     $i = 1;
                     while ($row = mysqli_fetch_assoc($RS)){
-                        echo "<tr>
+                        if($row['status'] == 'I'){
+                            $inativo = "style='opacity:0.5'";
+                        }else{
+                            $inativo = "style='opacity:1'";
+                        }
+                        echo "<tr ".$inativo.">
                         <th class='centro'>$i</th>
                         <td class='centro'>" . $row["id_produto"] . "</td>
                         <td class='centro'>" . $row["descricao"] . "</td>

@@ -61,6 +61,12 @@ $retorno = $_GET['retorno'];
             <div class='col'>
                 <h1 class='text-primary'>Registrar Venda</h1>
             </div>
+            <div class='col-auto d-flex align-items-end'>
+                <button type="button" class="btn btn-primary" id='modalVendas' data-toggle="modal"
+                    data-target=".bd-example-modal-lg" onclick='limpaModal();'>Nova Venda</button>
+            </div>
+        </div>
+        <div class='row'>
             <div class='col'>
                 <label for="data-inicial">Data inicial:</label>
                 <input type='date' name='dataI' id='dataI' class='form-control'>
@@ -69,13 +75,13 @@ $retorno = $_GET['retorno'];
                 <label for="data-final">Data final:</label>
                 <input type='date' name='dataF' id='dataF' class='form-control'>
             </div>
-            <div class='col'>
-                <input type='number' name='codigoVenda' id='codigoVenda' placeholder="Buscar" class='form-control' maxlength='7'
-                    oninput="maxLengthCheck(this)">
+            <div class='col d-flex align-items-end'>
+            <button type="button" class="btn btn-primary" id='filtraDatas'>Filtrar</button>
             </div>
-            <div class='col text-right'>
-                <button type="button" class="btn btn-primary" id='modalVendas' data-toggle="modal"
-                    data-target=".bd-example-modal-lg" onclick='limpaModal();'>Nova Venda</button>
+            <div class='col-6 col-sm-3 d-flex align-items-end'>
+                <input type='number' name='codigoVenda' id='codigoVenda' placeholder="Buscar" class='form-control'
+                    maxlength='7' oninput="maxLengthCheck(this)">
+                <div id="lupa"></div>
             </div>
         </div>
         <hr>

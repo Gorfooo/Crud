@@ -21,6 +21,22 @@ $(function () {
     $('#modalClientes').bind('click',function(){
         $('#salvar').attr("onclick","enviaCliente();");
     })
+    $("#codigoCliente").keydown(function() {
+        var x = event.keyCode;
+        if(x == 13){
+            $.ajax({
+                type:'POST',
+                url:'Valida/loadClientes.php',
+                dataType:'text',
+                success:function(result){
+                    $('#clientes').load("Valida/loadClientes.php?codigo="+$('#codigoCliente').val());
+                },
+                error:function(request, status, error){
+                    console.log(request + status + error);
+                }
+            });
+        }
+    })
 })
 
 function maxLengthCheck(object)//limita qtd de caracteres
@@ -280,4 +296,8 @@ function limpaModal(){
     $('#uf').val('');
     $('#pessoa').prop('checked',false);
     $('#status').prop( "checked", true);
+    $('#cnpj').removeAttr('style');
+    $('#cpf').removeAttr('style');
+    $('#cnpj').css('display','none');
+    $('#cpf').css('display','unset');
 }

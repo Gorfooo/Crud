@@ -1,9 +1,6 @@
 body{
     overflow-x: hidden;
 }
-.chart-container-line{
-    margin-top: 250px;
-}
 @media only screen and (max-width: 1225px){
     .chart-container-donut{
         margin-bottom: 220px;
@@ -15,4 +12,12 @@ body{
         width:46rem;
     }
 }
-/* 550px aumentar tamanho dos gráficos */
+@media only screen and (max-width: 1225px){
+    /* centralizar gráficos */
+    .centro{
+        
+    }
+}
+@media only screen and (max-width: 600px){
+    /* aumentar gráficos */
+}
