@@ -87,7 +87,7 @@ function excluiProduto(id){
         data:{
             id: id
         },
-	    dataType:'text',
+	    dataType:'json',
         success:function(result){
             $('#produtos').load("Valida/loadProdutos.php");
             mensagem = result.retornado;

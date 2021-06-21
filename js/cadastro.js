@@ -53,16 +53,6 @@ $(function(){//esconde mensagens de erro
     })
 })
 
-function validaSenha(){//valida senhas e aparece mensagem de erro
-    $(function(){
-        if($('#senha').val() != $('#senha2').val())
-        {
-            $('#senhaincorreta').fadeIn();
-        }
-    })
-    return false
-}
-
 setTimeout(function() {
     $('#dataantiga').fadeOut();
 }, 3000);
@@ -114,8 +104,9 @@ function enviaForm(){//valida senha e email, se estiverem corretas envia o form
         $('#email').addClass('borda');
         return false;
     }
-    else if (!(validaSenha()))
+    else if ($('#senha').val() != $('#senha2').val())
     {
+        $('#senhaincorreta').fadeIn();
         return false;
     }
     $('#form').submit();
