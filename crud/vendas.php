@@ -191,7 +191,7 @@ $retorno = $_GET['retorno'];
                                                 Item</button>
                                         </div>
                                         <div class='form-group col text-right'>
-                                            <button class='btn btn-primary salvarCel' id='salvar'
+                                            <button class='btn btn-primary salvarCel' id='salvar1'
                                                 onclick='validaCliente();'>Salvar
                                             </button>
                                         </div>
@@ -210,7 +210,7 @@ $retorno = $_GET['retorno'];
                                         </tbody>
                                     </table>
                                     <div class='fixed-bottom mb-5 mr-4' style='left:auto'>
-                                        <button class='btn btn-primary SalvarMic' id='salvar'
+                                        <button class='btn btn-primary SalvarMic' id='salvar2'
                                             onclick='validaCliente();'>Salvar</button>
                                     </div>
                                 </div>

@@ -321,7 +321,7 @@ function editaVenda(id_venda){
     event.preventDefault();
     erro = 3;
     limpaModal();
-    $('#salvar').attr("onclick","updateVenda(" + id_venda + ");");
+    $('#salvar1, #salvar2').attr("onclick","updateVenda(" + id_venda + ");");
     $.ajax({
         type:'POST',
         url:'Valida/loadModalVenda.php',
